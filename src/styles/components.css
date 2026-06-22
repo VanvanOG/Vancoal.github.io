@@ -2163,16 +2163,21 @@ html.is-project-route-entering .project-detail-route .project-hero-inner {
   border-right: 1px solid var(--project-line);
 }
 
-.project-menu a {
+.project-menu button {
   position: relative;
+  border: 0;
+  padding: 0;
+  background: transparent;
   color: var(--project-text-muted);
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.05em;
+  text-align: left;
   transition: color 180ms ease;
+  cursor: pointer;
 }
 
-.project-menu a::before {
+.project-menu button::before {
   position: absolute;
   top: -10px;
   left: 0;
@@ -2183,13 +2188,13 @@ html.is-project-route-entering .project-detail-route .project-hero-inner {
   transition: width 180ms ease;
 }
 
-.project-menu a:hover,
-.project-menu a.is-active {
+.project-menu button:hover,
+.project-menu button.is-active {
   color: var(--orange);
 }
 
-.project-menu a.is-active::before,
-.project-menu a:hover::before {
+.project-menu button.is-active::before,
+.project-menu button:hover::before {
   width: 22px;
 }
 
@@ -4000,21 +4005,26 @@ html.is-project-route-entering .project-detail-route .project-hero-inner {
   content: "";
 }
 
-.ai-lab-side-menu a {
+.ai-lab-side-menu button {
   position: relative;
+  border: 0;
+  padding: 0;
+  background: transparent;
   color: var(--lab-muted);
   font-size: 15px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-decoration: none;
+  text-align: left;
   text-transform: uppercase;
+  cursor: pointer;
 }
 
-.ai-lab-side-menu a[data-active="true"] {
+.ai-lab-side-menu button[data-active="true"] {
   color: var(--accent);
 }
 
-.ai-lab-side-menu a[data-active="true"]::before {
+.ai-lab-side-menu button[data-active="true"]::before {
   position: absolute;
   top: -12px;
   left: 0;

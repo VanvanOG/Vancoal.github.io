@@ -1,17 +1,15 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import App from "./App";
 import "./styles/tokens.css";
 import "./styles/global.css";
 import "./styles/components.css";
 
-const routerBaseName = import.meta.env.BASE_URL.replace(/\/$/, "") || undefined;
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter basename={routerBaseName}>
+    <HashRouter>
       <App />
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>,
 );

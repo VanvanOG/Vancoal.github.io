@@ -17,14 +17,6 @@ export default function HomePage() {
   const location = useLocation();
   const { startProjectRouteTransition } = useProjectRouteTransition();
   const panelIds = useMemo(() => ["top", "projects", "contact"], []);
-  const getIndexFromHash = useCallback(
-    (hash: string) => {
-      const id = hash.replace("#", "");
-      const index = panelIds.indexOf(id);
-      return index >= 0 ? index : 0;
-    },
-    [panelIds],
-  );
   const [activeIndex, setActiveIndex] = useState(0);
   const activeIndexRef = useRef(activeIndex);
   const lockRef = useRef(false);
@@ -32,17 +24,8 @@ export default function HomePage() {
   const touchStartYRef = useRef(0);
   const [selectedProjectSlug, setSelectedProjectSlug] = useState<string | null>(null);
 
-  const updateUrl = useCallback(
-    (index: number) => {
-      const id = panelIds[index];
-      const nextUrl = id === "top" ? window.location.pathname : `${window.location.pathname}#${id}`;
-      window.history.replaceState(null, "", nextUrl);
-    },
-    [panelIds],
-  );
-
   const goToPanel = useCallback(
-    (index: number, syncUrl = true) => {
+    (index: number) => {
       const nextIndex = Math.max(0, Math.min(panelIds.length - 1, index));
 
       if (nextIndex === activeIndexRef.current) {
@@ -54,15 +37,11 @@ export default function HomePage() {
       setActiveIndex(nextIndex);
       lockRef.current = true;
 
-      if (syncUrl) {
-        updateUrl(nextIndex);
-      }
-
       unlockTimerRef.current = window.setTimeout(() => {
         lockRef.current = false;
       }, TRANSITION_LOCK_MS);
     },
-    [panelIds.length, updateUrl],
+    [panelIds.length],
   );
 
   useEffect(() => {
@@ -83,16 +62,13 @@ export default function HomePage() {
     const targetPanel = (location.state as HomeLocationState | null)?.targetPanel;
 
     if (targetPanel) {
-      goToPanel(getIndexFromHash(`#${targetPanel}`), false);
+      const index = panelIds.indexOf(targetPanel);
+      goToPanel(index >= 0 ? index : 0);
       return;
     }
 
-    if (location.hash) {
-      window.history.replaceState(null, "", location.pathname);
-    }
-
-    goToPanel(0, false);
-  }, [getIndexFromHash, goToPanel, location.hash, location.pathname, location.state]);
+    goToPanel(0);
+  }, [goToPanel, location.state, panelIds]);
 
   useEffect(() => {
     const onWheel = (event: WheelEvent) => {

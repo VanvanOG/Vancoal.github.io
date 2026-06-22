@@ -59,6 +59,10 @@ const labMenuItems = [
 
 const labSectionIds = ["lab-prototype", "lab-plugin", "lab-skill"] as const;
 
+const scrollToCaseSection = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+};
+
 const collectEvidenceItems = (project: Project) => {
   const items = [
     project.coverEvidence,
@@ -199,9 +203,14 @@ function LabSideMenu() {
   return (
     <aside className="ai-lab-side-menu" data-reveal>
       {labMenuItems.map((item, index) => (
-        <a href={item.href} key={item.href} data-active={index === 0 ? "true" : undefined}>
+        <button
+          type="button"
+          key={item.href}
+          data-active={index === 0 ? "true" : undefined}
+          onClick={() => scrollToCaseSection(item.href.slice(1))}
+        >
           <span>{item.label}</span>
-        </a>
+        </button>
       ))}
     </aside>
   );
@@ -455,7 +464,7 @@ function AiLabProjectPage({
     <main className="project-page ai-lab-page" data-accent={project.accent}>
       <section className="ai-lab-hero" id="lab-overview">
         <div className="page-shell ai-lab-hero-inner">
-          <Link className="back-link" to="/#projects">
+          <Link className="back-link" to="/" state={{ targetPanel: "projects" }}>
             <ArrowLeft aria-hidden="true" size={17} />
             <span>Back Home</span>
           </Link>
@@ -574,7 +583,7 @@ export default function ProjectPage({ project }: ProjectPageProps) {
     <main className="project-page" data-accent={project.accent}>
       <section className="project-hero">
         <div className="page-shell project-hero-inner">
-          <Link className="back-link" to="/#projects">
+          <Link className="back-link" to="/" state={{ targetPanel: "projects" }}>
             <ArrowLeft aria-hidden="true" size={17} />
             <span>Back Home</span>
           </Link>
@@ -601,9 +610,14 @@ export default function ProjectPage({ project }: ProjectPageProps) {
 
           <nav className="project-menu" aria-label="Project case sections" data-reveal>
             {menuItems.map((item, index) => (
-              <a className={index === 0 ? "is-active" : undefined} href={item.href} key={item.href}>
+              <button
+                type="button"
+                className={index === 0 ? "is-active" : undefined}
+                key={item.href}
+                onClick={() => scrollToCaseSection(item.href.slice(1))}
+              >
                 {item.label}
-              </a>
+              </button>
             ))}
           </nav>
 

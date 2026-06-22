@@ -16,7 +16,7 @@ export default function NavBar() {
       </Link>
       <nav className="nav-links" aria-label="Page links">
         {panelLinks.map((link) => (
-          <Link key={link.id} state={{ targetPanel: link.id }} to={`/#${link.id}`}>
+          <Link key={link.id} state={{ targetPanel: link.id }} to="/">
             {link.label}
           </Link>
         ))}
