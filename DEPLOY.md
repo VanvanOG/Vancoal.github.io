@@ -8,6 +8,14 @@ Expected GitHub Pages URL:
 https://vanvanog.github.io/Vancoal.github.io/
 ```
 
+Project detail URLs use hash routing so they can be opened directly on GitHub Pages:
+
+```text
+https://vanvanog.github.io/Vancoal.github.io/#/projects/mars-era
+https://vanvanog.github.io/Vancoal.github.io/#/projects/habitat-ai-dialogue
+https://vanvanog.github.io/Vancoal.github.io/#/projects/ai-design-lab
+```
+
 This project already includes a GitHub Pages workflow at:
 
 ```text
@@ -25,7 +33,9 @@ and publishes the `dist` folder through GitHub Pages.
 
 ## Local prerequisites
 
-The current machine must have Git or GitHub CLI installed before the project can be pushed:
+This machine has already installed Git and GitHub CLI, and `gh` is authenticated as `VanvanOG`.
+
+If another machine needs setup:
 
 ```powershell
 winget install --id Git.Git -e
@@ -38,12 +48,9 @@ gh auth login
 From `G:\AI PRO\vancoal_web`:
 
 ```powershell
-git init
-git branch -M main
-git remote add origin https://github.com/VanvanOG/Vancoal.github.io.git
 git add .
-git commit -m "Deploy portfolio site"
-git push -u origin main
+git commit -m "Update portfolio site"
+git push
 ```
 
 After the push, GitHub Actions will deploy automatically. The first Pages deployment can take a few minutes.
