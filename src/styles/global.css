@@ -32,6 +32,11 @@ html.is-home-fullpage body {
   overscroll-behavior: none;
 }
 
+html.is-startup-loading,
+html.is-startup-loading body {
+  overflow: hidden;
+}
+
 a {
   color: inherit;
   text-decoration: none;

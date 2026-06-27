@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { ProjectRouteTransitionProvider } from "./components/ProjectRouteTransition";
 import ScrollToHash from "./components/ScrollToHash";
+import StartupLoadingOverlay from "./components/StartupLoadingOverlay";
 import HomePage from "./pages/HomePage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
 
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/projects/:slug" element={<ProjectDetailPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+      <StartupLoadingOverlay />
     </ProjectRouteTransitionProvider>
   );
 }

@@ -157,7 +157,7 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
   const configureVideo = (video: HTMLVideoElement) => {
     video.muted = true;
     video.playsInline = true;
-    video.preload = "auto";
+    video.preload = "metadata";
 
     if (video.readyState < 2) {
       video.load();
@@ -360,21 +360,6 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
   }, [activeIndex]);
 
   useEffect(() => {
-    projects.forEach((project) => {
-      const src = getProjectVideoSrc(project.slug);
-
-      if (document.head.querySelector(`link[data-project-video-preload="${src}"]`)) {
-        return;
-      }
-
-      const link = document.createElement("link");
-      link.as = "video";
-      link.href = src;
-      link.rel = "preload";
-      link.setAttribute("data-project-video-preload", src);
-      document.head.appendChild(link);
-    });
-
     requestAnimationFrame(() => {
       primeAllVideoFrames();
       centerSlides();
@@ -822,7 +807,7 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
                     onCanPlay={(event) => markVideoReady(event.currentTarget, index)}
                     onLoadedData={(event) => markVideoReady(event.currentTarget, index)}
                     playsInline
-                    preload="auto"
+                    preload="metadata"
                     ref={(node) => {
                       videoRefs.current[index] = node;
                     }}
