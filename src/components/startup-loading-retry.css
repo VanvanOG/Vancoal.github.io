@@ -1,0 +1,22 @@
+.startup-loading-retry {
+  position: absolute;
+  top: calc(50% + min(18vh, 140px));
+  left: 16px;
+  right: 16px;
+  z-index: 5;
+  color: #56676b;
+  text-align: center;
+  pointer-events: auto;
+}
+.startup-loading-retry button {
+  margin-top: 12px;
+  padding: 12px 24px;
+  border: 1px solid #303c3d;
+  border-radius: 4px;
+  background: #303c3d;
+  color: white;
+  cursor: pointer;
+}
+@media (max-height: 540px) {
+  .startup-loading-retry { top: auto; bottom: max(16px, env(safe-area-inset-bottom)); }
+}

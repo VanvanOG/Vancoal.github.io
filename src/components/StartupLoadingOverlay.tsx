@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import {
-  forceCompleteBootPreload,
   getBootPreloadState,
   startBootPreload,
   subscribeBootPreload,
   type BootPreloadState,
 } from "../utils/preloadManager";
 import { publicPath } from "../utils/publicPath";
+import './startup-loading-retry.css';
 
 export default function StartupLoadingOverlay() {
   const [preloadState, setPreloadState] = useState<BootPreloadState>(() => getBootPreloadState());
@@ -35,14 +35,10 @@ export default function StartupLoadingOverlay() {
     const startTimer = window.setTimeout(() => {
       void startBootPreload();
     }, reducedMotion ? 0 : 140);
-    const failSafeTimer = window.setTimeout(() => {
-      forceCompleteBootPreload();
-    }, reducedMotion ? 6000 : 30000);
 
     return () => {
       unsubscribe();
       window.clearTimeout(startTimer);
-      window.clearTimeout(failSafeTimer);
       document.documentElement.classList.remove("is-startup-loading");
     };
   }, [isHidden, reducedMotion]);
@@ -128,6 +124,7 @@ export default function StartupLoadingOverlay() {
       <div className="startup-loading-bottom" aria-label={`Loading ${progress}%`}>
         <strong>{progress}%</strong>
       </div>
+      {preloadState.error && <div className="startup-loading-retry" role="alert"><p>部分资源加载失败，请检查网络后重试。</p><button type="button" onClick={() => { void startBootPreload(); }}>重试加载</button></div>}
     </div>
   );
 }

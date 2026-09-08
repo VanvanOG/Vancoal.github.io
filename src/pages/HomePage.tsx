@@ -68,6 +68,7 @@ export default function HomePage() {
   }, []);
 
   const startProjectIntro = useCallback(() => {
+    if (document.documentElement.classList.contains("is-startup-loading")) return;
     if (lockRef.current || introPhaseRef.current !== "hero" || activeIndexRef.current !== 0) return;
 
     lockRef.current = true;
@@ -111,6 +112,7 @@ export default function HomePage() {
   }, []);
 
   const goToPanel = useCallback((index: number) => {
+    if (document.documentElement.classList.contains("is-startup-loading")) return;
     const nextIndex = Math.max(0, Math.min(panelIds.length - 1, index));
     const currentIndex = activeIndexRef.current;
 

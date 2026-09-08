@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import type { KeyboardEvent, MouseEvent, PointerEvent as ReactPointerEvent } from "react";
 import type { Project } from "../types";
 import { publicPath } from "../utils/publicPath";
+import { getPreloadedVideoPoster } from "../utils/preloadManager";
 import MagneticButton from "./MagneticButton";
 import CommissionCover from "./CommissionCover";
 
@@ -90,7 +91,10 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
   const [isDragging, setIsDragging] = useState(false);
   const [transitionDirection, setTransitionDirection] = useState<SwitchDirection>(1);
   const [readyVideoIndexes, setReadyVideoIndexes] = useState<Record<number, boolean>>({});
-  const [videoPosters, setVideoPosters] = useState<Record<number, string>>({});
+  const [videoPosters, setVideoPosters] = useState<Record<number, string>>(() => Object.fromEntries(projects.flatMap((project,index) => {
+    const poster = getPreloadedVideoPoster(getProjectVideoSrc(project.slug));
+    return poster ? [[index, poster]] : [];
+  })));
 
   const activeIndexRef = useRef(0);
   const dragProgressRef = useRef(0);
@@ -109,7 +113,7 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
   const primedVideoIndexesRef = useRef<Set<number>>(new Set());
   const targetIndexRef = useRef<number | null>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
-  const videoPosterRefs = useRef<Record<number, string>>({});
+  const videoPosterRefs = useRef<Record<number, string>>(videoPosters);
   const readyVideoIndexesRef = useRef<Set<number>>(new Set());
 
   const currentCountRef = useRef<HTMLSpanElement | null>(null);
@@ -226,43 +230,20 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
     });
   };
 
-  const primeVideoFrame = (index: number) => {
-    const video = videoRefs.current[index];
-
-    if (!video) {
-      return;
-    }
-
-    configureVideo(video);
-
-    const markReady = () => {
-      markVideoReady(video, index);
-      video.removeEventListener("loadeddata", markReady);
-      video.removeEventListener("canplay", markReady);
-      pauseVideoAsStill(video, index);
-    };
-
-    if (video.readyState >= 2) {
-      markReady();
-    } else {
-      video.addEventListener("loadeddata", markReady, { once: true });
-      video.addEventListener("canplay", markReady, { once: true });
-    }
-
-    video.play().catch(() => {
-      // Muted autoplay can still be delayed; loadeddata/canplay will still expose the first decoded frame.
-    });
-  };
-
-  const primeAllVideoFrames = () => {
-    projects.forEach((_, index) => primeVideoFrame(index));
-  };
-
   const syncVideoPlayback = (primaryIndex: number, secondaryIndex: number | null = null) => {
     targetIndexRef.current = secondaryIndex;
 
     videoRefs.current.forEach((video, index) => {
       if (!video) {
+        return;
+      }
+
+      const isPlaybackTarget = index === primaryIndex || index === secondaryIndex;
+      if (!isPlaybackTarget && videoPosterRefs.current[index]) {
+        // A startup poster is already decode-ready. Do not let configureVideo's
+        // metadata/load() request override this inactive slide's preload="none".
+        video.pause();
+        video.preload = "none";
         return;
       }
 
@@ -272,7 +253,7 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
         markVideoReady(video, index);
       }
 
-      if (index === primaryIndex || index === secondaryIndex) {
+      if (isPlaybackTarget) {
         video.play().catch(() => {
           // Muted autoplay can still be delayed by the browser; resident slides keep the current frame.
         });
@@ -280,7 +261,11 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
       }
 
       if (!primedVideoIndexesRef.current.has(index)) {
-        primeVideoFrame(index);
+        // LAB is intentionally absent from startup. Prepare its side-preview's
+        // first frame only now, without requiring autoplay.
+        video.preload = "auto";
+        video.load();
+        video.pause();
         return;
       }
 
@@ -374,7 +359,6 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
 
   useEffect(() => {
     requestAnimationFrame(() => {
-      primeAllVideoFrames();
       centerSlides();
     });
   }, [projects]);
@@ -826,7 +810,7 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
                     onCanPlay={(event) => markVideoReady(event.currentTarget, index)}
                     onLoadedData={(event) => markVideoReady(event.currentTarget, index)}
                     playsInline
-                    preload="metadata"
+                    preload={isActiveSlide ? "auto" : "none"}
                     ref={(node) => {
                       videoRefs.current[index] = node;
                     }}

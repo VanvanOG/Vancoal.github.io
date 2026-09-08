@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
-import { introFrameAtProgress, INTRO_FRAME_COUNT } from "../utils/introTimeline.mjs";
-import { publicPath } from "../utils/publicPath";
-
-export type IntroPlaybackDirection = "forward" | "reverse";
-
+import { useEffect, useRef, useState } from "react";
+import {
+  introResources,
+  type SequenceDirection,
+} from "../utils/sequenceResources";
+import { createPlaybackClock } from "../utils/sequencePlayback";
+export type IntroPlaybackDirection = SequenceDirection;
 interface ProjectIntroSequenceProps {
   direction: IntroPlaybackDirection | null;
   durationMs: number;
@@ -11,241 +12,189 @@ interface ProjectIntroSequenceProps {
   onFrame: (frame: number) => void;
   visible: boolean;
 }
-
-const INTRO_FRAME_SOURCES = Array.from(
-  { length: INTRO_FRAME_COUNT },
-  (_, index) => publicPath(`/media/project-intro-frames/project-intro-${String(index).padStart(3, "0")}.webp`),
-);
-const INTRO_MANIFEST_SOURCE = publicPath("/media/project-intro-frames/manifest.json");
-
-const DPR_CAP = 1.5;
-
-export default function ProjectIntroSequence({ direction, durationMs, onComplete, onFrame, visible }: ProjectIntroSequenceProps) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const drawFrameRef = useRef<(frame: number, playbackDirection: IntroPlaybackDirection) => void>(() => undefined);
-  const onCompleteRef = useRef(onComplete);
-  const onFrameRef = useRef(onFrame);
-
+export default function ProjectIntroSequence({
+  direction,
+  durationMs,
+  onComplete,
+  onFrame,
+  visible,
+}: ProjectIntroSequenceProps) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const callbacks = useRef({ onComplete, onFrame });
+  callbacks.current = { onComplete, onFrame };
+  const lastFrame = useRef(-1);
+  const previousDirection = useRef<SequenceDirection | null>(null);
+  const isVisible = useRef(visible);
+  isVisible.current = visible;
+  const drawRef = useRef<
+    (frame: number, direction: SequenceDirection) => boolean
+  >(() => false);
+  const [error, setError] = useState(false);
+  const failure = useRef(false);
+  const retrying = useRef(false);
   useEffect(() => {
-    onCompleteRef.current = onComplete;
-  }, [onComplete]);
-
-  useEffect(() => {
-    onFrameRef.current = onFrame;
-  }, [onFrame]);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = canvas?.getContext("2d");
-
-    if (!canvas || !context) {
-      return undefined;
-    }
-
-    const frames: Array<HTMLImageElement | null> = new Array(INTRO_FRAME_COUNT).fill(null);
-    const loading = new Set<number>();
-    const loaded = new Set<number>();
-    let cssWidth = 1;
-    let cssHeight = 1;
-    let lastDrawnFrame = -1;
-    let mounted = true;
-
-    void fetch(INTRO_MANIFEST_SOURCE)
-      .then((response) => response.json() as Promise<{ frameCount?: number; width?: number; height?: number }>)
-      .then((manifest) => {
-        if (!mounted) return;
-
-        if (manifest.frameCount !== INTRO_FRAME_COUNT || manifest.width !== 1600 || manifest.height !== 900) {
-          console.warn("Project intro frame manifest does not match the player configuration.");
-        }
-      })
-      .catch(() => {
-        console.warn("Project intro frame manifest could not be read.");
-      });
-
-    const drawCover = (image: HTMLImageElement) => {
-      const imageRatio = image.naturalWidth / image.naturalHeight;
-      const canvasRatio = cssWidth / cssHeight;
-      let sourceWidth = image.naturalWidth;
-      let sourceHeight = image.naturalHeight;
-      let sourceX = 0;
-      let sourceY = 0;
-
-      if (imageRatio > canvasRatio) {
-        sourceWidth = image.naturalHeight * canvasRatio;
-        sourceX = (image.naturalWidth - sourceWidth) / 2;
+    const canvas = canvasRef.current,
+      context = canvas?.getContext("2d");
+    if (!canvas || !context) return;
+    let width = 1,
+      height = 1,
+      mounted = true;
+    const draw = (
+      frame: number,
+      playbackDirection: SequenceDirection,
+      force = false,
+    ) => {
+      if (!force && !failure.current)
+        void introResources.prepare(frame, playbackDirection).catch(() => {
+          if (mounted) {
+            failure.current = true;
+            setError(true);
+          }
+        });
+      const bitmap = introResources.get(frame);
+      if (!bitmap) return false;
+      introResources.pin(frame);
+      if (frame === lastFrame.current && !force) return true;
+      const ratio = width / height;
+      let sw = bitmap.width,
+        sh = bitmap.height,
+        sx = 0,
+        sy = 0;
+      if (sw / sh > ratio) {
+        sw = sh * ratio;
+        sx = (bitmap.width - sw) / 2;
       } else {
-        sourceHeight = image.naturalWidth / canvasRatio;
-        sourceY = (image.naturalHeight - sourceHeight) / 2;
+        sh = sw / ratio;
+        sy = (bitmap.height - sh) / 2;
       }
-
-      context.clearRect(0, 0, cssWidth, cssHeight);
-      context.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, 0, 0, cssWidth, cssHeight);
+      context.clearRect(0, 0, width, height);
+      context.drawImage(bitmap, sx, sy, sw, sh, 0, 0, width, height);
+      lastFrame.current = frame;
+      return true;
     };
-
-    const loadFrame = (frame: number) => {
-      if (frame < 0 || frame >= INTRO_FRAME_COUNT || loading.has(frame) || loaded.has(frame)) {
-        return;
-      }
-
-      loading.add(frame);
-      const image = new Image();
-      image.decoding = "async";
-      image.onload = () => {
-        if (!mounted) {
-          return;
-        }
-
-        frames[frame] = image;
-        loaded.add(frame);
-        loading.delete(frame);
-      };
-      image.onerror = () => {
-        loading.delete(frame);
-      };
-      image.src = INTRO_FRAME_SOURCES[frame];
-    };
-
-    const findNearestLoaded = (frame: number, playbackDirection: IntroPlaybackDirection) => {
-      const target = Math.max(0, Math.min(INTRO_FRAME_COUNT - 1, frame));
-
-      if (loaded.has(target)) {
-        return target;
-      }
-
-      for (let offset = 1; offset < INTRO_FRAME_COUNT; offset += 1) {
-        const preferred = playbackDirection === "forward" ? target - offset : target + offset;
-        const fallback = playbackDirection === "forward" ? target + offset : target - offset;
-
-        if (preferred >= 0 && preferred < INTRO_FRAME_COUNT && loaded.has(preferred)) {
-          return preferred;
-        }
-
-        if (fallback >= 0 && fallback < INTRO_FRAME_COUNT && loaded.has(fallback)) {
-          return fallback;
-        }
-      }
-
-      return null;
-    };
-
-    const drawFrame = (frame: number, playbackDirection: IntroPlaybackDirection) => {
-      const nearest = findNearestLoaded(frame, playbackDirection);
-
-      if (nearest === null || nearest === lastDrawnFrame) {
-        return;
-      }
-
-      const image = frames[nearest];
-
-      if (!image) {
-        return;
-      }
-
-      drawCover(image);
-      lastDrawnFrame = nearest;
-    };
-
     const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      const dpr = Math.min(window.devicePixelRatio || 1, DPR_CAP);
-      cssWidth = Math.max(1, rect.width);
-      cssHeight = Math.max(1, rect.height);
-      canvas.width = Math.floor(cssWidth * dpr);
-      canvas.height = Math.floor(cssHeight * dpr);
+      const rect = canvas.getBoundingClientRect(),
+        dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+      width = Math.max(1, rect.width);
+      height = Math.max(1, rect.height);
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
       context.setTransform(dpr, 0, 0, dpr, 0, 0);
       context.imageSmoothingEnabled = true;
       context.imageSmoothingQuality = "high";
-      lastDrawnFrame = -1;
-      drawFrame(0, "forward");
-    };
-
-    const priorityFrames = [0, 1, 2, 150, 260, INTRO_FRAME_COUNT - 1];
-    priorityFrames.forEach(loadFrame);
-
-    let preloadCursor = 0;
-    let preloadActive = 0;
-    const maxConcurrentPreloads = 5;
-
-    const pumpPreload = () => {
-      while (mounted && preloadActive < maxConcurrentPreloads && preloadCursor < INTRO_FRAME_COUNT) {
-        const frame = preloadCursor;
-        preloadCursor += 1;
-
-        if (loading.has(frame) || loaded.has(frame)) {
-          continue;
-        }
-
-        preloadActive += 1;
-        const image = new Image();
-        image.decoding = "async";
-        image.onload = () => {
-          if (mounted) {
-            frames[frame] = image;
-            loaded.add(frame);
-          }
-
-          loading.delete(frame);
-          preloadActive -= 1;
-          pumpPreload();
-        };
-        image.onerror = () => {
-          loading.delete(frame);
-          preloadActive -= 1;
-          pumpPreload();
-        };
-        loading.add(frame);
-        image.src = INTRO_FRAME_SOURCES[frame];
+      // The currently displayed bitmap stays pinned during resize and decode-window changes.
+      if (lastFrame.current >= 0) {
+        const bitmap = introResources.get(lastFrame.current);
+        if (bitmap) draw(lastFrame.current, "forward", true);
       }
     };
-
-    drawFrameRef.current = drawFrame;
+    drawRef.current = draw;
     resize();
-    pumpPreload();
     window.addEventListener("resize", resize);
-
     return () => {
       mounted = false;
-      drawFrameRef.current = () => undefined;
+      drawRef.current = () => false;
       window.removeEventListener("resize", resize);
+      introResources.releaseDecoded();
+      lastFrame.current = -1;
     };
   }, []);
-
   useEffect(() => {
     if (!direction) {
-      return undefined;
+      previousDirection.current = null;
+      return;
     }
-
-    let frameId = 0;
-    let finished = false;
-    const startedAt = performance.now();
-    const initialFrame = direction === "forward" ? 0 : INTRO_FRAME_COUNT - 1;
-
-    drawFrameRef.current(initialFrame, direction);
-    onFrameRef.current(initialFrame);
-
+    let id = 0;
+    const continuing =
+      previousDirection.current !== null &&
+      previousDirection.current !== direction &&
+      lastFrame.current >= 0;
+    const target =
+      direction === "forward" ? lastFrame.current : 300 - lastFrame.current;
+    const progress = continuing
+      ? target <= 150
+        ? (target / 150) * 0.28
+        : 0.28 + ((target - 150) / 150) * 0.72
+      : 0;
+    previousDirection.current = direction;
+    const clock = createPlaybackClock(direction, durationMs, progress);
+    let hidden = document.hidden;
+    const visibility = () => {
+      hidden = document.hidden;
+      clock.tick(performance.now(), () => false, true);
+    };
+    document.addEventListener("visibilitychange", visibility);
     const animate = (now: number) => {
-      const progress = Math.min(1, Math.max(0, (now - startedAt) / durationMs));
-      const frame = introFrameAtProgress(progress, direction);
-      drawFrameRef.current(frame, direction);
-      onFrameRef.current(frame);
-
-      if (progress >= 1) {
-        if (!finished) {
-          finished = true;
-          onCompleteRef.current(direction);
-        }
-
+      const result = clock.tick(
+        now,
+        (frame) => {
+          if (!drawRef.current(frame, direction)) return false;
+          callbacks.current.onFrame(frame);
+          return true;
+        },
+        hidden || !isVisible.current || failure.current,
+      );
+      if (result.done) {
+        callbacks.current.onComplete(direction);
         return;
       }
-
-      frameId = window.requestAnimationFrame(animate);
+      id = requestAnimationFrame(animate);
     };
-
-    frameId = window.requestAnimationFrame(animate);
-
-    return () => window.cancelAnimationFrame(frameId);
+    id = requestAnimationFrame(animate);
+    return () => {
+      cancelAnimationFrame(id);
+      document.removeEventListener("visibilitychange", visibility);
+    };
   }, [direction, durationMs]);
-
-  return <canvas aria-hidden="true" className={`project-intro-canvas${visible ? " is-visible" : ""}`} ref={canvasRef} />;
+  const retry = async () => {
+    if (retrying.current) return;
+    retrying.current = true;
+    try {
+      await introResources.preload();
+      await introResources.prepare(
+        lastFrame.current < 0
+          ? direction === "reverse"
+            ? 300
+            : 0
+          : lastFrame.current,
+        direction || "forward",
+      );
+      failure.current = false;
+      setError(false);
+    } catch {
+      setError(true);
+    } finally {
+      retrying.current = false;
+    }
+  };
+  return (
+    <>
+      <canvas
+        aria-hidden="true"
+        className={`project-intro-canvas${visible ? " is-visible" : ""}`}
+        ref={canvasRef}
+      />
+      {error && visible && (
+        <div
+          role="alert"
+          style={{
+            position: "fixed",
+            zIndex: 10000,
+            bottom: 24,
+            left: "50%",
+            transform: "translateX(-50%)",
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => {
+              void retry();
+            }}
+          >
+            过渡画面加载失败，重试
+          </button>
+        </div>
+      )}
+    </>
+  );
 }

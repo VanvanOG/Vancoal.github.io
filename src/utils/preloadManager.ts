@@ -1,390 +1,243 @@
-import { projects } from "../data/projects";
 import { publicPath } from "./publicPath";
-
-type ResourceKind = "image" | "video";
-type ItemStatus = "pending" | "active" | "complete";
-
-interface PreloadResource {
-  kind: ResourceKind;
-  src: string;
-  timeoutMs?: number;
-}
-
+import { introResources } from "./sequenceResources";
 export interface BootPreloadItem {
   id: string;
   title: string;
   subtitle: string;
   progress: number;
-  status: ItemStatus;
+  status: "pending" | "active" | "complete";
 }
-
 export interface BootPreloadState {
   isDone: boolean;
   items: BootPreloadItem[];
   progress: number;
+  error: string | null;
 }
-
-interface BootPreloadDefinition {
-  id: string;
-  title: string;
-  subtitle: string;
-  minDurationMs?: number;
-  resources: PreloadResource[];
-}
-
-const image = (path: string, timeoutMs = 7000): PreloadResource => ({
+type Resource = { kind: "image" | "video"; src: string };
+const image = (src: string): Resource => ({
   kind: "image",
-  src: path.startsWith("/") ? publicPath(path) : path,
-  timeoutMs,
+  src: publicPath(src),
 });
-
-const videoMetadata = (path: string, timeoutMs = 1200): PreloadResource => ({
+const video = (src: string): Resource => ({
   kind: "video",
-  src: path.startsWith("/") ? publicPath(path) : path,
-  timeoutMs,
+  src: publicPath("/media/project-videos/" + src + ".mp4"),
 });
-
-const encodedAsset = (folder: string, fileName: string) => `/media/${folder}/${encodeURIComponent(fileName)}`;
-const encodedPng = (folder: string, name: string) => encodedAsset(folder, `${name}.png`);
-
-const BOOT_PRELOAD_DEFINITIONS: BootPreloadDefinition[] = [
+const definitions = [
   {
     id: "homepage",
     title: "Homepage Base",
     subtitle: "正在加载首页基础",
-    minDurationMs: 260,
     resources: [
-      image("/media/loading/loading-loop-matched.gif"),
-      image("/media/loading/complete-icon.svg"),
-      image("/media/loading/pending-icon-v3.svg"),
-    ],
+      "loading-loop-matched.gif",
+      "complete-icon.svg",
+      "pending-icon-v3.svg",
+    ].map((n) => image("/media/loading/" + n)),
   },
   {
     id: "hero",
     title: "Hero Visual",
     subtitle: "正在同步首页视觉",
-    minDurationMs: 280,
-    resources: [
-      image("/media/hero-frames/hero-frame-001.jpg"),
-      image("/media/hero-frames/hero-frame-025.jpg"),
-      image("/media/hero-frames/hero-frame-049.jpg"),
-      image("/media/hero-frames/hero-frame-074.jpg"),
-      image("/media/hero-frames/hero-frame-098.jpg"),
-    ],
+    resources: ["001", "025", "049", "074", "098"].map((n) =>
+      image("/media/hero-frames/hero-frame-" + n + ".jpg"),
+    ),
+  },
+  {
+    id: "transition",
+    title: "Project Transition",
+    subtitle: "正在准备项目过渡",
+    resources: [] as Resource[],
   },
   {
     id: "mars-era",
     title: "Mars Era",
-    subtitle: "正在预热火星纪元",
-    minDurationMs: 260,
-    resources: [
-      image("/media/project-cards/mars-era-card.png"),
-      image(encodedPng("mars-era", "完整界面图")),
-      image(encodedPng("mars-era", "战斗失败-补偿奖励")),
-      videoMetadata("/media/project-videos/mars-era.mp4"),
-    ],
+    subtitle: "正在预热火星纪元 PVP 活动",
+    resources: [image("/media/mars-era/完整界面图.png"), video("mars-era")],
   },
   {
     id: "ai-dialogue",
     title: "AI Dialogue",
     subtitle: "正在预热 AI 对话",
-    minDurationMs: 260,
+    resources: ["基础界面", "图片重新设计-4", "图片重新设计-6"]
+      .map((n) =>
+        image(
+          "/media/ai-dialogue-20260907/assets/" +
+            encodeURIComponent(n) +
+            ".png",
+        ),
+      )
+      .concat(video("ai-dialogue-2")),
+  },
+  {
+    id: "ai-commission",
+    title: "AI Commission",
+    subtitle: "正在预热 AI 委托",
     resources: [
-      image("/media/project-cards/ai-dialogue-card.png"),
-      image(encodedPng("habitat-ai-dialogue", "基础界面")),
-      image(encodedPng("habitat-ai-dialogue", "试装清单界面")),
-      videoMetadata("/media/project-videos/ai-dialogue-2.mp4"),
+      image("/media/ai-commission/06.webp"),
+      image("/media/ai-commission/18.webp"),
+      video("ai-commission-v1"),
     ],
   },
   {
-    id: "ai-design-lab",
-    title: "AI Design Lab",
-    subtitle: "正在预热 AI LAB",
-    minDurationMs: 260,
-    resources: [
-      image("/media/project-cards/ai-lab-card.png"),
-      image(encodedPng("ai-design-lab", "画格子")),
-      image(encodedPng("ai-design-lab", "标注插件")),
-      image(encodedPng("ai-design-lab", "交互原则SKILL")),
-      videoMetadata("/media/project-videos/ai-lab.mp4"),
-    ],
-  },
-  {
-    id: "case-files",
-    title: "Case Files",
-    subtitle: "正在整理案例文件",
-    minDurationMs: 300,
-    resources: [
-      image(encodedPng("mars-era", "局内技能界面")),
-      image(encodedPng("habitat-ai-dialogue", "设计中界面表现")),
-      videoMetadata(encodedAsset("ai-design-lab", "标注插件演示视频.mp4")),
-    ],
+    id: "ava-league",
+    title: "AVA League",
+    subtitle: "正在预热数据埋点",
+    resources: [image("/media/ava-league/main.webp"), video("ava-league-v1")],
   },
 ];
-
-const createInitialState = (): BootPreloadState => ({
+const resources = new Map<string, Promise<void>>();
+const posters = new Map<string, string>();
+export const getPreloadedVideoPoster = (src: string) => posters.get(src);
+const listeners = new Set<(state: BootPreloadState) => void>();
+let state: BootPreloadState = {
   isDone: false,
-  items: BOOT_PRELOAD_DEFINITIONS.map((item) => ({
-    id: item.id,
+  error: null,
+  progress: 0,
+  items: definitions.map(({ id, title, subtitle }) => ({
+    id,
+    title,
+    subtitle,
     progress: 0,
     status: "pending",
-    subtitle: item.subtitle,
-    title: item.title,
   })),
-  progress: 0,
-});
-
-const resourceCache = new Map<string, Promise<void>>();
-const listeners = new Set<(state: BootPreloadState) => void>();
-
-let bootState = createInitialState();
-let bootPromise: Promise<void> | null = null;
-let idleStarted = false;
-
-const delay = (ms: number) => new Promise<void>((resolve) => window.setTimeout(resolve, ms));
-
-const emit = () => {
-  const snapshot = getBootPreloadState();
-  listeners.forEach((listener) => listener(snapshot));
 };
-
-const setItemState = (id: string, patch: Partial<BootPreloadItem>) => {
-  bootState = {
-    ...bootState,
-    items: bootState.items.map((item) => (item.id === id ? { ...item, ...patch } : item)),
-  };
-  recalculateProgress();
-  emit();
-};
-
-const recalculateProgress = () => {
-  const total = bootState.items.length || 1;
-  const progress = bootState.items.reduce((sum, item) => sum + item.progress, 0) / total;
-
-  bootState = {
-    ...bootState,
-    progress: Math.round(Math.min(progress * 100, 100)),
-  };
-};
-
-const loadWithTimeout = (resource: PreloadResource, loader: (finish: () => void) => void) =>
-  new Promise<void>((resolve) => {
-    let settled = false;
-    const finish = () => {
-      if (settled) {
-        return;
-      }
-
-      settled = true;
-      window.clearTimeout(timer);
-      resolve();
-    };
-    const timer = window.setTimeout(finish, resource.timeoutMs ?? 6000);
-
-    loader(finish);
-  });
-
-const loadImageResource = (resource: PreloadResource) =>
-  loadWithTimeout(resource, (finish) => {
-    const img = new Image();
-
-    img.decoding = "async";
-    img.onload = () => {
-      if (img.decode) {
-        img.decode().catch(() => undefined).finally(finish);
-        return;
-      }
-
-      finish();
-    };
-    img.onerror = finish;
-    img.src = resource.src;
-  });
-
-const loadVideoMetadataResource = (resource: PreloadResource) =>
-  loadWithTimeout(resource, (finish) => {
-    const video = document.createElement("video");
-
-    video.muted = true;
-    video.playsInline = true;
-    video.preload = "metadata";
-
-    let cleaned = false;
-    const cleanup = () => {
-      if (cleaned) {
-        return;
-      }
-
-      cleaned = true;
-      video.removeEventListener("loadedmetadata", cleanup);
-      video.removeEventListener("loadeddata", cleanup);
-      video.removeEventListener("error", cleanup);
-      finish();
-      video.removeAttribute("src");
-      video.load();
-    };
-    video.addEventListener("loadedmetadata", cleanup, { once: true });
-    video.addEventListener("loadeddata", cleanup, { once: true });
-    video.addEventListener("error", cleanup, { once: true });
-
-    video.src = resource.src;
-    video.load();
-  });
-
-const preloadResource = (resource: PreloadResource) => {
-  const cacheKey = `${resource.kind}:${resource.src}`;
-  const cached = resourceCache.get(cacheKey);
-
-  if (cached) {
-    return cached;
-  }
-
-  const promise =
-    resource.kind === "video" ? loadVideoMetadataResource(resource) : loadImageResource(resource);
-
-  resourceCache.set(cacheKey, promise);
-  return promise;
-};
-
-const preloadResourceGroup = async (
-  resources: PreloadResource[],
-  onProgress: (progress: number) => void,
-  concurrency = 2,
-) => {
-  if (!resources.length) {
-    onProgress(1);
-    return;
-  }
-
-  let completed = 0;
-  let cursor = 0;
-  const workerCount = Math.min(concurrency, resources.length);
-
-  const runWorker = async () => {
-    while (cursor < resources.length) {
-      const index = cursor;
-      cursor += 1;
-      await preloadResource(resources[index]).catch(() => undefined);
-      completed += 1;
-      onProgress(completed / resources.length);
-    }
-  };
-
-  await Promise.all(Array.from({ length: workerCount }, runWorker));
-};
-
-const runBootPreload = async () => {
-  for (const item of BOOT_PRELOAD_DEFINITIONS) {
-    const startedAt = performance.now();
-
-    setItemState(item.id, { progress: 0, status: "active" });
-
-    await preloadResourceGroup(item.resources, (progress) => {
-      setItemState(item.id, { progress: Math.min(progress, 0.98), status: "active" });
-    });
-
-    const remainingMinDuration = Math.max((item.minDurationMs ?? 0) - (performance.now() - startedAt), 0);
-
-    if (remainingMinDuration > 0) {
-      await delay(remainingMinDuration);
-    }
-
-    setItemState(item.id, { progress: 1, status: "complete" });
-  }
-
-  bootState = {
-    ...bootState,
-    isDone: true,
-    progress: 100,
-  };
-  emit();
-  startIdlePreload();
-};
-
-const collectProjectMedia = () => {
-  const media = new Set<string>();
-  const visit = (value: unknown) => {
-    if (typeof value === "string") {
-      if (/\.(png|jpe?g|gif|webp|svg)(\?|$)/i.test(value)) {
-        media.add(value);
-      }
-      return;
-    }
-
-    if (Array.isArray(value)) {
-      value.forEach(visit);
-      return;
-    }
-
-    if (value && typeof value === "object") {
-      Object.values(value).forEach(visit);
-    }
-  };
-
-  visit(projects);
-  return [...media].map((src) => ({ kind: "image" as const, src, timeoutMs: 7000 }));
-};
-
+let running: Promise<void> | null = null;
 export const getBootPreloadState = (): BootPreloadState => ({
-  ...bootState,
-  items: bootState.items.map((item) => ({ ...item })),
+  ...state,
+  items: state.items.map((i) => ({ ...i })),
 });
-
-export const subscribeBootPreload = (listener: (state: BootPreloadState) => void) => {
-  listeners.add(listener);
-  listener(getBootPreloadState());
-
-  return () => {
-    listeners.delete(listener);
-  };
-};
-
-export const startBootPreload = () => {
-  if (!bootPromise) {
-    bootPromise = runBootPreload();
-  }
-
-  return bootPromise;
-};
-
-export const forceCompleteBootPreload = () => {
-  if (bootState.isDone) {
-    return;
-  }
-
-  bootState = {
-    isDone: true,
-    items: bootState.items.map((item) => ({
-      ...item,
-      progress: 1,
-      status: "complete",
-    })),
-    progress: 100,
-  };
+const emit = () => listeners.forEach((fn) => fn(getBootPreloadState()));
+const update = (
+  id: string,
+  progress: number,
+  status: BootPreloadItem["status"],
+) => {
+  state.items = state.items.map((i) =>
+    i.id === id ? { ...i, progress, status } : i,
+  );
+  state.progress = Math.floor(
+    (state.items.reduce((sum, i) => sum + i.progress, 0) / state.items.length) *
+      100,
+  );
   emit();
-  startIdlePreload();
 };
-
-export const startIdlePreload = () => {
-  if (idleStarted || typeof window === "undefined") {
-    return;
-  }
-
-  idleStarted = true;
-
-  const run = () => {
-    const idleResources = collectProjectMedia();
-    void preloadResourceGroup(idleResources, () => undefined, 2);
+function load(resource: Resource) {
+  const key = resource.kind + ":" + resource.src;
+  if (resources.has(key)) return resources.get(key)!;
+  const promise = new Promise<void>((resolve, reject) => {
+    let settled = false;
+    const media =
+      resource.kind === "image" ? new Image() : document.createElement("video");
+    const finish = (error?: unknown) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      media.onload = null;
+      media.onerror = null;
+      if (media instanceof HTMLVideoElement) {
+        media.onloadeddata = null;
+        media.removeAttribute("src");
+        media.load();
+      }
+      error ? reject(error) : resolve();
+    };
+    const timer = window.setTimeout(
+      () => finish(new Error("Resource timed out: " + resource.src)),
+      60000,
+    );
+    media.onerror = () => finish(new Error("Resource failed: " + resource.src));
+    if (media instanceof HTMLImageElement) {
+      media.decoding = "async";
+      media.onload = () => {
+        void media.decode().then(() => finish(), finish);
+      };
+      media.src = resource.src;
+    } else {
+      media.muted = true;
+      media.playsInline = true;
+      media.preload = "auto";
+      media.onloadeddata = () => {
+        try {
+          if (media.readyState < 2 || !media.videoWidth)
+            throw new Error("Video frame unavailable");
+          const canvas = document.createElement("canvas");
+          canvas.width = media.videoWidth;
+          canvas.height = media.videoHeight;
+          const ctx = canvas.getContext("2d");
+          if (!ctx) throw new Error("Canvas unavailable");
+          ctx.drawImage(media, 0, 0);
+          posters.set(resource.src, canvas.toDataURL("image/jpeg", 0.82));
+          finish();
+        } catch (error) {
+          finish(error);
+        }
+      };
+      media.src = resource.src;
+      media.load();
+    }
+  }).catch((error) => {
+    resources.delete(key);
+    throw error;
+  });
+  resources.set(key, promise);
+  return promise;
+}
+export const subscribeBootPreload = (fn: (state: BootPreloadState) => void) => {
+  listeners.add(fn);
+  fn(getBootPreloadState());
+  return () => {
+    listeners.delete(fn);
   };
-
-  const browserWindow = window as typeof window & {
-    requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
-  };
-
-  if (browserWindow.requestIdleCallback) {
-    browserWindow.requestIdleCallback(run, { timeout: 2500 });
-    return;
-  }
-
-  window.setTimeout(run, 1200);
 };
+export function startBootPreload() {
+  if (running) return running;
+  if (state.isDone) return Promise.resolve();
+  state.error = null;
+  emit();
+  running = (async () => {
+    for (const item of definitions) {
+      if (state.items.find((i) => i.id === item.id)?.status === "complete")
+        continue;
+      const startedAt = performance.now();
+      update(item.id, 0, "active");
+      if (item.id === "transition") {
+        await introResources.preload((p) => update(item.id, p * 0.9, "active"));
+        await introResources.prepare(0, "forward");
+      } else {
+        let completed = 0;
+        const errors: unknown[] = [];
+        for (const resource of item.resources) {
+          try {
+            await load(resource);
+            completed++;
+            update(
+              item.id,
+              (completed / item.resources.length) * 0.98,
+              "active",
+            );
+          } catch (error) {
+            errors.push(error);
+          }
+        }
+        if (errors.length) throw errors[0];
+      }
+      const remaining = Math.max(
+        (item.id === "hero" ? 280 : 260) - (performance.now() - startedAt),
+        0,
+      );
+      if (remaining)
+        await new Promise((resolve) => window.setTimeout(resolve, remaining));
+      update(item.id, 1, "complete");
+    }
+    state.isDone = true;
+    state.progress = 100;
+    emit();
+  })()
+    .catch((error) => {
+      state.error = error instanceof Error ? error.message : "加载失败，请重试";
+      emit();
+    })
+    .finally(() => {
+      running = null;
+    });
+  return running;
+}
