@@ -1,0 +1,11 @@
+const {chromium}=require('C:/Users/86183/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');
+(async()=>{const b=await chromium.launch();const failures=[];try{const p=await b.newPage({viewport:{width:1440,height:900}});await p.goto('http://127.0.0.1:5174/');await p.locator('.startup-loading').waitFor({state:'detached',timeout:45000});await p.waitForTimeout(1800);
+const check=async(name,fn)=>{try{await fn();console.log('PASS',name)}catch(e){failures.push(name+': '+e.message)}};
+await check('hero magnetic wrapper never clips',async()=>{assert.equal(await p.locator('.hero-status .magnetic-zone').evaluate(e=>getComputedStyle(e).clipPath),'none')});
+await p.keyboard.press('c');await p.waitForTimeout(1300);
+await check('mail uses same magnetic feedback and keeps mailto',async()=>{const a=p.locator('.contact-mail');assert.match(await a.getAttribute('href'),/^mailto:/);const r=await a.boundingBox();await p.mouse.move(r.x+r.width-10,r.y+r.height/2);await p.waitForTimeout(400);assert.ok((await a.boundingBox()).x>r.x+1)});
+await p.keyboard.press('p');await p.locator('.project-intro-project-layer.is-interactive').waitFor();
+await check('hovered navigation stays bright, peer dims',async()=>{const n=p.getByRole('button',{name:'Next project',exact:true});const prev=p.getByRole('button',{name:'Previous project',exact:true});await n.hover();await p.waitForTimeout(350);assert.equal(await n.evaluate(e=>getComputedStyle(e).opacity),'1');assert.ok(Number(await prev.evaluate(e=>getComputedStyle(e).opacity))<.6);await prev.hover();await p.waitForTimeout(350);assert.equal(await prev.evaluate(e=>getComputedStyle(e).opacity),'1');assert.ok(Number(await n.evaluate(e=>getComputedStyle(e).opacity))<.6)});
+assert.deepEqual(failures,[]);
+}finally{await b.close()}})().catch(e=>{console.error(e);process.exitCode=1});

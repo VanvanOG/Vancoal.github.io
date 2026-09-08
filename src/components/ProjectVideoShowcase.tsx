@@ -5,6 +5,7 @@ import type { KeyboardEvent, MouseEvent, PointerEvent as ReactPointerEvent } fro
 import type { Project } from "../types";
 import { publicPath } from "../utils/publicPath";
 import MagneticButton from "./MagneticButton";
+import CommissionCover from "./CommissionCover";
 
 type SwitchDirection = -1 | 1;
 
@@ -14,12 +15,16 @@ const PLAY_HIDE_DURATION = 0.16;
 const PLAY_SHOW_DURATION = 0.14;
 
 const projectVideoSources: Record<string, string> = {
+  "ai-commission": publicPath("/media/project-videos/ai-commission-v1.mp4"),
+  "ava-league": publicPath("/media/project-videos/ava-league-v1.mp4"),
   "ai-design-lab": publicPath("/media/project-videos/ai-lab.mp4"),
   "habitat-ai-dialogue": publicPath("/media/project-videos/ai-dialogue-2.mp4"),
   "mars-era": publicPath("/media/project-videos/mars-era.mp4"),
 };
 
 const projectVideoLabels: Record<string, string> = {
+  "ai-commission": "AI COMMISSION",
+  "ava-league": "AVA LEAGUE",
   "ai-design-lab": "AI CODING",
   "habitat-ai-dialogue": "AI CHAT",
   "mars-era": "PVP EVENT",
@@ -27,7 +32,15 @@ const projectVideoLabels: Record<string, string> = {
 
 export const getProjectVideoLabel = (slug: string) => projectVideoLabels[slug] ?? "PROJECT";
 
-export const getProjectVideoSrc = (slug: string) => projectVideoSources[slug] ?? projectVideoSources["mars-era"];
+const projectChineseLabels: Record<string, string> = {
+  "mars-era": "火星纪元PVP活动",
+  "habitat-ai-dialogue": "AI 装修对话",
+  "ai-commission": "AI 委托玩法",
+  "ava-league": "AVA 联赛 · 数据埋点",
+  "ai-design-lab": "AI 设计实验室",
+};
+
+export const getProjectVideoSrc = (slug: string) => projectVideoSources[slug] ?? "";
 
 interface ProjectVideoShowcaseProps {
   projects: Project[];
@@ -727,10 +740,16 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
           <div className="project-video-meta-window">
             <strong key={`meta-current-${activeProject.slug}`} ref={currentMetaRef}>
               {getProjectVideoLabel(activeProject.slug)}
+              <small className="project-video-name-zh" lang="zh-CN">
+                {projectChineseLabels[activeProject.slug] ?? activeProject.title}
+              </small>
             </strong>
             {targetProject ? (
               <strong className="is-incoming" ref={incomingMetaRef}>
                 {getProjectVideoLabel(targetProject.slug)}
+                <small className="project-video-name-zh" lang="zh-CN">
+                  {projectChineseLabels[targetProject.slug] ?? targetProject.title}
+                </small>
               </strong>
             ) : null}
           </div>
@@ -799,7 +818,7 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
                       src={poster}
                     />
                   ) : null}
-                  <video
+                  {getProjectVideoSrc(project.slug) ? <video
                     autoPlay={isActiveSlide}
                     className={!isVideoReady && poster ? "is-video-waiting" : undefined}
                     loop
@@ -812,7 +831,7 @@ export default function ProjectVideoShowcase({ projects, isOpening, onOpen }: Pr
                       videoRefs.current[index] = node;
                     }}
                     src={getProjectVideoSrc(project.slug)}
-                  />
+                  /> : <CommissionCover slug={project.slug} />}
                 </div>
               );
             })}

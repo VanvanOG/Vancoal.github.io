@@ -1,0 +1,37 @@
+const {chromium}=require('C:/Users/86183/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');
+const base=process.env.DEMO_URL||'http://127.0.0.1:5174/';
+(async()=>{const browser=await chromium.launch();try{
+ const page=await browser.newPage({viewport:{width:1440,height:1000},reducedMotion:'no-preference'});
+ await page.addInitScript(()=>{window.aiMotionSamples=[];const tick=()=>{const e=document.querySelector('.ai-case .project-title-block');if(e)window.aiMotionSamples.push({overlay:!!document.querySelector('.startup-loading,.project-open-overlay'),opacity:Number(getComputedStyle(e).opacity),revealed:e.dataset.revealed});requestAnimationFrame(tick)};requestAnimationFrame(tick)});
+ await page.goto(base+'#/projects/habitat-ai-dialogue');
+ await page.locator('.startup-loading').waitFor({state:'detached',timeout:45000});await page.waitForTimeout(1300);
+ const initial=await page.evaluate(()=>window.aiMotionSamples);
+ assert.ok(initial.some(s=>s.overlay&&s.opacity===0));
+ assert.ok(initial.some(s=>!s.overlay&&s.opacity>0&&s.opacity<1));
+ assert.equal(initial.at(-1).opacity,1);
+ assert.equal(await page.locator('[data-ai-module]').evaluateAll(es=>es.every(e=>e.hasAttribute('data-mars-reveal'))),true);
+ const target=page.locator('#process .section-heading');
+ assert.equal(await target.getAttribute('data-revealed'),'false');
+ await page.locator('.ai-reading-nav button').filter({hasText:'重型任务'}).click();await page.waitForTimeout(1200);
+ assert.equal(await target.getAttribute('data-revealed'),'true');assert.equal(await target.evaluate(e=>Number(getComputedStyle(e).opacity)),1);
+ for(let y=0;y<await page.evaluate(()=>document.documentElement.scrollHeight);y+=650){await page.evaluate(y=>scrollTo(0,y),y);await page.waitForTimeout(35)}
+ await page.waitForTimeout(900);
+ assert.equal(await page.locator('[data-ai-module]').evaluateAll(es=>es.filter(e=>getComputedStyle(e).display!=='none').every(e=>e.dataset.revealed==='true')),true);
+ await page.evaluate(()=>scrollTo(0,0));await page.waitForTimeout(100);assert.equal(await page.locator('.project-title-block').evaluate(e=>Number(getComputedStyle(e).opacity)),1);
+ await page.locator('.ai-back').click();await page.locator('.project-intro-project-layer.is-interactive').waitFor();
+ await page.getByRole('button',{name:'Next project',exact:true}).click();await page.getByRole('button',{name:/Open AI 装修对话/}).click();
+ await page.locator('.ai-case').waitFor({state:'attached'});await page.evaluate(()=>window.aiMotionSamples=[]);
+ await page.locator('.project-open-overlay').waitFor({state:'detached'});await page.waitForTimeout(1300);
+ const route=await page.evaluate(()=>window.aiMotionSamples);assert.ok(route.some(s=>!s.overlay&&s.opacity>0&&s.opacity<1));assert.equal(route.at(-1).opacity,1);
+ await page.emulateMedia({reducedMotion:'reduce'});await page.waitForTimeout(100);
+ assert.equal(await page.locator('[data-ai-module]').evaluateAll(es=>es.every(e=>Number(getComputedStyle(e).opacity)===1)),true);
+ const mobile=await browser.newPage({viewport:{width:360,height:800},reducedMotion:'no-preference'});
+ await mobile.goto(base+'#/projects/habitat-ai-dialogue');await mobile.locator('.startup-loading').waitFor({state:'detached',timeout:45000});
+ const cards=mobile.locator('#process .ai-evidence.count-3 article');
+ await cards.first().evaluate(e=>scrollTo(0,scrollY+e.getBoundingClientRect().top-420));await mobile.waitForTimeout(800);
+ assert.equal(await cards.nth(0).getAttribute('data-revealed'),'true');assert.equal(await cards.nth(1).getAttribute('data-revealed'),'false');assert.equal(await cards.nth(2).getAttribute('data-revealed'),'false');
+ await cards.nth(1).evaluate(e=>scrollTo(0,scrollY+e.getBoundingClientRect().top-420));await mobile.waitForTimeout(800);assert.equal(await cards.nth(1).getAttribute('data-revealed'),'true');
+ await mobile.close();
+ console.log('PASS: loader-aware entrance, all modules, directory visibility, once-per-visit, carousel return/entrance, reduced motion');
+}finally{await browser.close()}})().catch(e=>{console.error(e);process.exitCode=1});

@@ -1,0 +1,2040 @@
+{
+  "tree": [
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap opening",
+        "id": "top"
+      },
+      "children": [
+        {
+          "tag": "span",
+          "attrs": {
+            "class": "eyebrow"
+          },
+          "children": [
+            "交互设计案例 / 活动行为分析"
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "title-row"
+          },
+          "children": [
+            {
+              "tag": "h1",
+              "attrs": {},
+              "children": [
+                "AVA 联赛",
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "."
+                  ]
+                },
+                {
+                  "tag": "small",
+                  "attrs": {},
+                  "children": [
+                    "数据埋点与界面决策"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {},
+              "children": [
+                "项目主负责 · 交互设计",
+                {
+                  "tag": "br",
+                  "attrs": {},
+                  "children": []
+                },
+                "行为分层 / 数据分析 / 设计原则"
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "p",
+          "attrs": {
+            "class": "opening-lead"
+          },
+          "children": [
+            "分析规则与奖励页、活动主界面的操作记录，",
+            {
+              "tag": "br",
+              "attrs": {},
+              "children": []
+            },
+            "分别确定内容访问路径与功能展示优先级。"
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "cover"
+          },
+          "children": [
+            {
+              "tag": "figure",
+              "attrs": {
+                "data-image": "main",
+                "data-caption": "SLG 联赛活动主界面：参赛、任务、奖励与排名共处一屏"
+              },
+              "children": []
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "cover-note"
+              },
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "chart-no-axes-combined"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "strong",
+                  "attrs": {},
+                  "children": [
+                    "从行为记录",
+                    {
+                      "tag": "br",
+                      "attrs": {},
+                      "children": []
+                    },
+                    "到界面取舍"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "规则与奖励页的查询记录，用于调整入口结构；主界面的分层数据，用于提炼任务、商店与排名的设计原则。"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap chapter",
+        "id": "scope"
+      },
+      "children": [
+        "\n",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "section-heading"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {
+                "class": "section-no"
+              },
+              "children": [
+                "研究范围与方法"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "围绕两个界面，分别判断访问路径与功能优先级"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "lead"
+                  },
+                  "children": [
+                    "这次分析包含两组研究：规则与奖励页关注玩家查阅什么内容，活动主界面关注不同付费层级访问哪些功能。两组分析分别对应入口结构调整和界面设计原则。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "study-overview"
+          },
+          "children": [
+            "\n",
+            {
+              "tag": "a",
+              "attrs": {
+                "href": "#reward"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "分析一 / 规则与奖励页"
+                  ]
+                },
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "奖励查询是否需要经过规则入口？"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "规则与奖励 TAB 埋点 → 访问记录 → 规则、奖励入口并列"
+                  ]
+                },
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "arrow-down-right"
+                  },
+                  "children": []
+                }
+              ]
+            },
+            "\n",
+            {
+              "tag": "a",
+              "attrs": {
+                "href": "#tracking"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "分析二 / 活动主界面"
+                  ]
+                },
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "哪些操作与信息应当优先呈现？"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "五类功能埋点 → 付费分层比较 → 任务、商店、排名三项原则"
+                  ]
+                },
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "arrow-down-right"
+                  },
+                  "children": []
+                }
+              ]
+            },
+            "\n"
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "subsection population"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {
+                    "class": "section-no"
+                  },
+                  "children": [
+                    "样本与分层"
+                  ]
+                },
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "先区分用户，再比较操作频次"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "原资料记录 ",
+                    {
+                      "tag": "strong",
+                      "attrs": {},
+                      "children": [
+                        "8,793 名用户"
+                      ]
+                    },
+                    "，按最近 28 天日均付费额分为 L0—L7。这里的层级代表付费分组，不代表新手、高手或竞技排名。"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "note"
+                  },
+                  "children": [
+                    "以下人数规模与占比沿用项目汇总资料；28 天是付费分层窗口，并非已确认的行为统计周期。"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "population-bar",
+                    "role": "img",
+                    "aria-label": "原资料分层占比：L0 71%，L1至L5 24%，L6至L7 5%"
+                  },
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {
+                        "style": "width:71%"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "attrs": {
+                        "style": "width:24%"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "span",
+                      "attrs": {
+                        "style": "width:5%"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "population-legend"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "class": "swatch free"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "71%"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "L0",
+                            {
+                              "tag": "br",
+                              "attrs": {},
+                              "children": []
+                            },
+                            "未付费组"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "class": "swatch paying"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "24%"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "L1—L5",
+                            {
+                              "tag": "br",
+                              "attrs": {},
+                              "children": []
+                            },
+                            "付费组"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "class": "swatch core"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "5%"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "L6—L7",
+                            {
+                              "tag": "br",
+                              "attrs": {},
+                              "children": []
+                            },
+                            "较高付费组"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "note"
+                  },
+                  "children": [
+                    "原表已缺失，分组人数与统计分母无法重新复算。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n"
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "band",
+        "id": "reward"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "wrap chapter"
+          },
+          "children": [
+            "\n",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "strategy-title blue"
+              },
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "signpost"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "分析一 · 规则与奖励的访问关系"
+                  ]
+                }
+              ]
+            },
+            "\n",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "section-heading"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {
+                    "class": "section-no"
+                  },
+                  "children": [
+                    "研究对象 / 内容页"
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h2",
+                      "attrs": {},
+                      "children": [
+                        "奖励查询是否需要经过规则入口？"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "lead"
+                      },
+                      "children": [
+                        "原界面将规则说明与奖励信息放在同一页面，通过顶部 TAB 切换。第一组分析分别记录两类内容的点击，检查奖励查询是否值得拥有独立入口。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "wide-story"
+              },
+              "children": [
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "rules",
+                    "data-caption": "规则与奖励内容页：顶部 TAB 切换不同内容"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "两类埋点，分别记录查阅行为"
+                      ]
+                    },
+                    {
+                      "tag": "h4",
+                      "attrs": {},
+                      "children": [
+                        "规则 TAB"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "记录玩家点击规则说明的行为。"
+                      ]
+                    },
+                    {
+                      "tag": "h4",
+                      "attrs": {},
+                      "children": [
+                        "奖励系列 TAB"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "将多个奖励 TAB 的点击合计，观察奖励内容的查询量。"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "note"
+                      },
+                      "children": [
+                        "两类记录的入口数量不同；TAB 查询与主界面的商店访问是两组不同事件。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "reward-evidence subsection"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {
+                        "class": "section-no"
+                      },
+                      "children": [
+                        "数据观察"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "奖励内容有独立的查询记录"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "这组数据促使我重新考虑奖励信息的访问路径：玩家若只想确认活动收益，是否仍有必要先经过规则入口？"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "reported-values"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "9,729",
+                            {
+                              "tag": "span",
+                              "attrs": {},
+                              "children": [
+                                " 次"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "奖励系列 TAB 点击总量"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "6,232",
+                            {
+                              "tag": "span",
+                              "attrs": {},
+                              "children": [
+                                " 人"
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "原稿记录的活动参与人数"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "note"
+                      },
+                      "children": [
+                        "点击次数包含重复操作，参与人数是人数口径；两者不构成转化漏斗，也不能说明每次访问都会查询奖励。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "subsection"
+              },
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "设计判断：将规则与奖励入口并列"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "measure"
+                  },
+                  "children": [
+                    "让查询规则和查询奖励的玩家分别直达对应内容，减少奖励访问路径中的中间跳转。"
+                  ]
+                }
+              ]
+            },
+            "\n",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "route-comparison"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "route-row"
+                  },
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "原访问结构"
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "route-flow"
+                      },
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "主活动入口"
+                          ]
+                        },
+                        {
+                          "tag": "i",
+                          "attrs": {
+                            "data-lucide": "arrow-right"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "规则入口"
+                          ]
+                        },
+                        {
+                          "tag": "i",
+                          "attrs": {
+                            "data-lucide": "arrow-right"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "奖励 TAB"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "route-row"
+                  },
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "调整建议"
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "branch"
+                      },
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "主活动入口"
+                          ]
+                        },
+                        {
+                          "tag": "i",
+                          "attrs": {
+                            "data-lucide": "git-fork"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "div",
+                          "attrs": {},
+                          "children": [
+                            {
+                              "tag": "span",
+                              "attrs": {},
+                              "children": [
+                                "规则界面"
+                              ]
+                            },
+                            {
+                              "tag": "span",
+                              "attrs": {
+                                "class": "destination"
+                              },
+                              "children": [
+                                "奖励界面"
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "note"
+              },
+              "children": [
+                "结构对照说明方案变化，现有资料未提供调整后的访问漏斗或流失率。"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap chapter",
+        "id": "tracking"
+      },
+      "children": [
+        "\n",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "strategy-title"
+          },
+          "children": [
+            {
+              "tag": "i",
+              "attrs": {
+                "data-lucide": "panels-top-left"
+              },
+              "children": []
+            },
+            {
+              "tag": "span",
+              "attrs": {},
+              "children": [
+                "分析二 · 活动主界面的功能访问差异"
+              ]
+            }
+          ]
+        },
+        "\n",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "section-heading"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {
+                "class": "section-no"
+              },
+              "children": [
+                "研究对象 / 主界面"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "不同付费层级的玩家，频繁访问哪些功能？"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "lead"
+                  },
+                  "children": [
+                    "第二组分析转向活动主界面，对参加比赛、查看任务、商店、排名和规则分别记录点击，再按付费层级比较人均频次。研究重点从内容的访问路径，转向操作与信息的展示优先级。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "subsection"
+          },
+          "children": [
+            {
+              "tag": "h3",
+              "attrs": {},
+              "children": [
+                "在完整界面中明确五类埋点"
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "measure"
+              },
+              "children": [
+                "点击反映玩家执行了什么操作。先明确事件对应的入口，再讨论行为含义，避免将“点击报名”直接等同于“完成参赛”。"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "inspector"
+              },
+              "children": [
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "main",
+                    "data-caption": "主界面埋点位置；虚线框随右侧说明切换"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "regions"
+                  },
+                  "children": [
+                    {
+                      "tag": "button",
+                      "attrs": {
+                        "data-box": "19,72,15,10"
+                      },
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "01"
+                          ]
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "参加比赛"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "观察报名入口点击，不替代真实进入或完成比赛的数据。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "button",
+                      "attrs": {
+                        "data-box": "63,75,23,9"
+                      },
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "02"
+                          ]
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "查看排名详情"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "观察对排名信息的主动查询。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "button",
+                      "attrs": {
+                        "data-box": "94,16,5.7,11"
+                      },
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "03"
+                          ]
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "查看规则"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "记录从主界面打开规则入口的行为。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "button",
+                      "attrs": {
+                        "data-box": "94,29,5.7,12"
+                      },
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "04"
+                          ]
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "查看兑换商店"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "原稿将右侧 Reward 入口映射为商店事件。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "button",
+                      "attrs": {
+                        "data-box": "94,43,5.7,11"
+                      },
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "05"
+                          ]
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "查看任务"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "观察任务入口的访问频次，作为操作层级判断的依据。"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n"
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "band",
+        "id": "analysis"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "wrap chapter"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "strategy-title"
+              },
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "chart-line"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "主界面分析 · 分层数据与三项发现"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "section-heading"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {
+                    "class": "section-no"
+                  },
+                  "children": [
+                    "分层比较"
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h2",
+                      "attrs": {},
+                      "children": [
+                        "任务持续被访问，其他行为的相对次序随群体变化"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "lead"
+                      },
+                      "children": [
+                        "项目以人均点击次数比较五类行为。任务在各组中均位于最高位置；商店、参赛与排名并不保持同一种排序，因此需要分别判断它们的展示方式。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "chart-layout"
+              },
+              "children": [
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "class": "chart",
+                    "data-image": "behavior-chart",
+                    "data-caption": "各付费组的人均点击频次：横轴为付费分组，纵轴为次数"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "findings"
+                  },
+                  "children": [
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "class": "line-key tasks"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "h3",
+                          "attrs": {},
+                          "children": [
+                            "任务是跨组的高频操作"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "原文标注：L0 为 1.01 次，L6 为 5.54 次。各组中任务线均高于其余四类行为。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "class": "line-key shop"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "h3",
+                          "attrs": {},
+                          "children": [
+                            "中层商店访问值得单独分析"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "L2—L4 商店访问较低付费组更频繁，但不是每一组都排第二；参赛行为在部分组中高于商店。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {
+                            "class": "line-key rank"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "h3",
+                          "attrs": {},
+                          "children": [
+                            "较高付费组更频繁地查询排名"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "图中较高付费组的排名点击多于低付费组，但仍低于任务。其展示价值应结合玩家本人位置理解。"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "note"
+              },
+              "children": [
+                "上述是不同用户组的横向观察，不是同一用户的成长曲线。原资料未完整保留点击统计窗口与分母定义；频次不直接代表喜好或改版效果。"
+              ]
+            },
+            "\n",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "interpretation"
+              },
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "scan-search"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "点击频次提供设计线索，不能单独解释用户动机"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "反复访问可能源于需求，也可能与信息更新、入口层级或查找成本有关。因此，我将图中的行为差异用于确定优先研究的操作，再结合活动目标提出界面方案。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap chapter",
+        "id": "decisions"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "strategy-title"
+          },
+          "children": [
+            {
+              "tag": "i",
+              "attrs": {
+                "data-lucide": "list-checks"
+              },
+              "children": []
+            },
+            {
+              "tag": "span",
+              "attrs": {},
+              "children": [
+                "主界面原则一 · 高频任务直接操作"
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "section-heading"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {
+                "class": "section-no"
+              },
+              "children": [
+                "任务频次 → 操作层级"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "将任务放到一级界面，但不强行采用同一种任务布局"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "lead"
+                  },
+                  "children": [
+                    "跨组高频访问支持优先考虑任务的触达效率。具体呈现仍取决于任务本身：需要比较多个条件时展示列表；以重复执行为主时，突出操作与阶段奖励。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "evidence-strip"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "数据观察"
+                  ]
+                },
+                {
+                  "tag": "strong",
+                  "attrs": {},
+                  "children": [
+                    "八个付费组中，任务点击均最高"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "i",
+              "attrs": {
+                "data-lucide": "arrow-right"
+              },
+              "children": []
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "设计判断"
+                  ]
+                },
+                {
+                  "tag": "strong",
+                  "attrs": {},
+                  "children": [
+                    "减少进入任务后的额外操作层级"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "grid two"
+          },
+          "children": [
+            {
+              "tag": "article",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "条件型任务 · 常驻列表"
+                  ]
+                },
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "tasks-list",
+                    "data-caption": "方案线框：任务条件与领取、前往操作同屏"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "不同任务条件需要比较时，保留列表结构，并让已完成任务可直接领取，未完成任务可继续前往。"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "article",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "重复型任务 · 操作与进度相邻"
+                  ]
+                },
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "tasks-action",
+                    "data-caption": "方案线框：主要操作按钮与阶段宝箱进度"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "当活动围绕同一种重复行为展开时，以主操作按钮配合进度宝箱，减少反复阅读列表的需要。"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "band",
+        "id": "shop"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "wrap chapter"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "strategy-title blue"
+              },
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "shopping-bag"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "主界面原则二 · 在商店内部明确比较重点"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "section-heading"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {
+                    "class": "section-no"
+                  },
+                  "children": [
+                    "商店访问 → 商品组织"
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h2",
+                      "attrs": {},
+                      "children": [
+                        "入口保持清晰，商品价值通过层级表达"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "lead"
+                      },
+                      "children": [
+                        "中层用户反复访问商店，使商品选择成为值得继续检查的环节。方案将设计重点放在商店内部：区分核心奖励与普通资源，帮助玩家识别优先比较的商品。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "wide-story"
+              },
+              "children": [
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "shop",
+                    "data-caption": "方案线框：核心商品使用差异化底板与优惠标记"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "区分商品价值，而非平均强调每个条目"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "选择少量核心奖励强化底板，普通商品保持一致；在适用时配合推荐、限购或折扣信息，提供明确的比较依据。"
+                      ]
+                    },
+                    {
+                      "tag": "h4",
+                      "attrs": {},
+                      "children": [
+                        "入口提醒与实际购买条件关联"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "原方案建议在具备购买力时提示红点，避免提醒与当前可执行行为脱节。"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "note"
+                      },
+                      "children": [
+                        "这是基于访问数据提出的设计建议；现有资料没有证明玩家因选择困难而囤积代币。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap chapter",
+        "id": "ranking"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "strategy-title"
+          },
+          "children": [
+            {
+              "tag": "i",
+              "attrs": {
+                "data-lucide": "trophy"
+              },
+              "children": []
+            },
+            {
+              "tag": "span",
+              "attrs": {},
+              "children": [
+                "主界面原则三 · 让排名与本人位置关联"
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "section-heading"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {
+                "class": "section-no"
+              },
+              "children": [
+                "排名查询 → 信息相关性"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "保留领先者，也展示自己所在的位置"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "lead"
+                  },
+                  "children": [
+                    "主界面原本以前三名为中心，但排名查询并不只服务领先者。对于榜外玩家，自己的位置与相邻竞争者才是继续比较所需的信息。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "wide-story"
+          },
+          "children": [
+            {
+              "tag": "figure",
+              "attrs": {
+                "data-image": "ranking",
+                "data-caption": "方案线框：前三名、扩展列表与固定的本人排名行"
+              },
+              "children": []
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "本人或联盟排名持续可见"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "在主界面展示当前本人或联盟位置，并扩展前三之外的排名列表，不要求玩家反复进入详情才能找到自己。"
+                  ]
+                },
+                {
+                  "tag": "h4",
+                  "attrs": {},
+                  "children": [
+                    "按活动目标决定是否展示"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "在 PVP 或排行榜活动中启用；没有竞争目标的 PVE 活动不沿用该模块。"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "note"
+                  },
+                  "children": [
+                    "付费层级不等于实际排名。本方案不依赖“高付费玩家多数位于某个名次区间”的假设。"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap chapter",
+        "id": "outcome"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "section-heading"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {
+                "class": "section-no"
+              },
+              "children": [
+                "两组分析的产出"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "一组调整访问路径，一组形成界面原则"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "lead"
+                  },
+                  "children": [
+                    "规则与奖励分析处理的是内容入口之间的关系；主界面分析则通过分层行为，确定操作层级、商品信息与排名展示的侧重。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "table-scroll"
+          },
+          "children": [
+            {
+              "tag": "table",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "caption",
+                  "attrs": {},
+                  "children": [
+                    "研究对象、证据与方案的对应关系"
+                  ]
+                },
+                {
+                  "tag": "thead",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "tr",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "th",
+                          "attrs": {},
+                          "children": [
+                            "研究对象"
+                          ]
+                        },
+                        {
+                          "tag": "th",
+                          "attrs": {},
+                          "children": [
+                            "分析证据"
+                          ]
+                        },
+                        {
+                          "tag": "th",
+                          "attrs": {},
+                          "children": [
+                            "方案产出"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "tbody",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "tr",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "td",
+                          "attrs": {},
+                          "children": [
+                            "规则与奖励页"
+                          ]
+                        },
+                        {
+                          "tag": "td",
+                          "attrs": {},
+                          "children": [
+                            "规则 / 奖励 TAB 的访问记录与原有路径"
+                          ]
+                        },
+                        {
+                          "tag": "td",
+                          "attrs": {},
+                          "children": [
+                            "规则与奖励入口并列"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "tr",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "td",
+                          "attrs": {},
+                          "children": [
+                            "活动主界面"
+                          ]
+                        },
+                        {
+                          "tag": "td",
+                          "attrs": {},
+                          "children": [
+                            "五类功能在不同付费层级中的点击频次"
+                          ]
+                        },
+                        {
+                          "tag": "td",
+                          "attrs": {},
+                          "children": [
+                            "任务一级操作、商店商品分级、本人排名展示"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "tag": "p",
+          "attrs": {
+            "class": "closing-note"
+          },
+          "children": [
+            "现有资料包含行为分析与界面方案，未保留方案上线后的效果测量。"
+          ]
+        }
+      ]
+    }
+  ],
+  "dimensions": {
+    "rules": {
+      "width": 861,
+      "height": 401
+    },
+    "main": {
+      "width": 861,
+      "height": 401
+    },
+    "tasks-list": {
+      "width": 883,
+      "height": 408
+    },
+    "tasks-action": {
+      "width": 883,
+      "height": 408
+    },
+    "shop": {
+      "width": 883,
+      "height": 408
+    },
+    "ranking": {
+      "width": 884,
+      "height": 408
+    },
+    "behavior-chart": {
+      "width": 1066,
+      "height": 760
+    }
+  }
+}

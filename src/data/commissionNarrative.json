@@ -1,0 +1,3119 @@
+{
+  "tree": [
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap opening",
+        "id": "top"
+      },
+      "children": [
+        "\n ",
+        {
+          "tag": "span",
+          "attrs": {
+            "class": "eyebrow"
+          },
+          "children": [
+            "交互设计案例 / AI 委托玩法"
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "title-row"
+          },
+          "children": [
+            {
+              "tag": "h1",
+              "attrs": {},
+              "children": [
+                "AI 委托玩法",
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "."
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {},
+              "children": [
+                "项目主负责 · 交互设计",
+                {
+                  "tag": "br",
+                  "attrs": {},
+                  "children": []
+                },
+                "对话探索 / 阶段衔接 / 游戏反馈"
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "p",
+          "attrs": {
+            "class": "opening-lead"
+          },
+          "children": [
+            "从了解委托者到完成房间设计，",
+            {
+              "tag": "br",
+              "attrs": {},
+              "children": []
+            },
+            "通过交互衔接两个阶段的目标、操作与奖励。"
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "opening-panels hero-full"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {
+                    "class": "phase-label"
+                  },
+                  "children": [
+                    "对话阶段 · 从交流中发现偏好"
+                  ]
+                },
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "06",
+                    "data-caption": "对话完整界面：与委托者交流，积累已知偏好"
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {
+                    "class": "phase-label blue"
+                  },
+                  "children": [
+                    "装修阶段 · 在房间中满足偏好"
+                  ]
+                },
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "18",
+                    "data-caption": "装修完整界面：选择家具，完成委托者的要求"
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        "\n"
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap chapter",
+        "id": "overview"
+      },
+      "children": [
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "section-heading"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {
+                "class": "section-no"
+              },
+              "children": [
+                "项目背景"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "与 AI 委托者交谈，再为他设计一个房间"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "lead"
+                  },
+                  "children": [
+                    "玩家需要先理解委托者的生活习惯与喜好，再在预算和时间限制内完成装修。AI 在这里扮演提出需求的委托者，装修方案由玩家决定。对话中发现的信息，应当成为后续设计的依据，而非结束聊天后便失去作用。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "strategy-grid"
+          },
+          "children": [
+            {
+              "tag": "article",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "messages-square"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "将交流组织为偏好探索"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "用线索、回应策略和偏好归纳，呈现玩家如何逐步了解委托者。"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "article",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "package-open"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "用奖励关系衔接两阶段"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "对话解锁奖励上限，装修决定实际所得；宝箱与开箱工具分别对应两种进展。"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "article",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "sparkles"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "在操作中回应设计成果"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "家具变化、角色反应与偏好进度相互对应，反馈发生在玩家做出设计的位置。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "journey"
+          },
+          "children": [
+            {
+              "tag": "article",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "对话探索"
+                  ]
+                },
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "了解什么"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "生活描述 → 追问线索 → 发现偏好"
+                  ]
+                },
+                {
+                  "tag": "strong",
+                  "attrs": {},
+                  "children": [
+                    "积累宝箱 · 确定奖励上限"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "journey-bridge"
+              },
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "arrow-right"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "确认结束沟通",
+                    {
+                      "tag": "br",
+                      "attrs": {},
+                      "children": []
+                    },
+                    "携带已知偏好"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "article",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "装修挑战"
+                  ]
+                },
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "如何满足"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "挑选家具 → 调整布置 → 满足偏好"
+                  ]
+                },
+                {
+                  "tag": "strong",
+                  "attrs": {},
+                  "children": [
+                    "收集开箱工具 · 决定实际奖励"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n"
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap chapter",
+        "id": "entry"
+      },
+      "children": [
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "section-heading"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {
+                "class": "section-no"
+              },
+              "children": [
+                "玩法入口"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "先了解委托条件，再开始探索需求"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "lead"
+                  },
+                  "children": [
+                    "大厅用于比较和选择委托；委托信息页集中呈现房间、角色、限制和已知偏好。进入对话之前，玩家已经知道为谁设计、面对什么空间，以及需要承担哪些约束。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "page-route"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {},
+              "children": [
+                "委托大厅"
+              ]
+            },
+            {
+              "tag": "span",
+              "attrs": {},
+              "children": [
+                "委托信息"
+              ]
+            },
+            {
+              "tag": "span",
+              "attrs": {},
+              "children": [
+                "对话探索"
+              ]
+            },
+            {
+              "tag": "span",
+              "attrs": {},
+              "children": [
+                "装修设计"
+              ]
+            },
+            {
+              "tag": "span",
+              "attrs": {},
+              "children": [
+                "提交结算"
+              ]
+            },
+            {
+              "tag": "span",
+              "attrs": {},
+              "children": [
+                "我的委托 / 查看作品"
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "layout",
+            "data-inspect": "hall"
+          },
+          "children": [
+            {
+              "tag": "figure",
+              "attrs": {
+                "class": "full-screen",
+                "data-image": "04",
+                "data-caption": "委托大厅完整界面"
+              },
+              "children": []
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "regions"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "01"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "任务卡片先说明条件"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "委托描述、预算与设计资质置于左侧，右侧集中显示最高奖励、限时和操作入口，便于比较任务条件。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "02"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "资格不足直接反映在入口"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "不可接取的任务保留内容，但按钮变为“资质不够”，在开始前说明限制。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "03"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "正在进行的任务有独立去向"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "底部“我的委托”固定提供回访入口；任务池刷新时间位于顶部，与单项委托的剩余时间区分。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "layout subsection",
+            "data-inspect": "brief"
+          },
+          "children": [
+            {
+              "tag": "figure",
+              "attrs": {
+                "class": "full-screen",
+                "data-image": "05",
+                "data-caption": "委托信息完整界面"
+              },
+              "children": []
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "regions"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "01"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "房间与委托者建立设计情境"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "先展示当前空间和委托者描述，让玩家对装修对象有具体认识。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "02"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "报酬与任务约束集中展示"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "奖励上限、预算、限时和资质要求相邻呈现，形成接取前的判断依据。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "03"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "已知偏好是交流的起点"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "四类偏好中同时保留已知标签和“暂未发现”，提示还有哪些需求可在接下来的交流中探索。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n"
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "band",
+        "id": "dialogue"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "wrap chapter"
+          },
+          "children": [
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "strategy-title"
+              },
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "messages-square"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "对话探索 · 将交流转化为设计依据"
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "section-heading"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {
+                    "class": "section-no"
+                  },
+                  "children": [
+                    "阶段一 / 完整界面"
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h2",
+                      "attrs": {},
+                      "children": [
+                        "同时呈现正在聊什么，以及已经了解到什么"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "lead"
+                      },
+                      "children": [
+                        "对话承担探索过程，顶部偏好面板保留探索结果。回应策略靠近输入区，既提供追问方向，也允许玩家修改后再表达。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "layout"
+              },
+              "children": [
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "class": "full-screen",
+                    "data-image": "06",
+                    "data-caption": "对话阶段完整界面：偏好、交流记录与回应入口"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "regions"
+                  },
+                  "children": [
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "01"
+                          ]
+                        },
+                        {
+                          "tag": "h3",
+                          "attrs": {},
+                          "children": [
+                            "阶段出口与奖励预期"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "“确认沟通”位于顶部，和当前发现进度共同说明这一阶段的目标；进入装修前再确认一次，避免误结束探索。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "02"
+                          ]
+                        },
+                        {
+                          "tag": "h3",
+                          "attrs": {},
+                          "children": [
+                            "可收起的偏好记录"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "常态保留进度与一行标签，给对话让出空间；展开后按美观、功能、选品和布局查看，尚未发现的类别仍然可见。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "03"
+                          ]
+                        },
+                        {
+                          "tag": "h3",
+                          "attrs": {},
+                          "children": [
+                            "交流中的线索与新发现"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "线索直接附着于委托者的描述。新偏好在对应回复附近反馈，再归入顶部面板，使谈话与信息积累相互对应。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "04"
+                          ]
+                        },
+                        {
+                          "tag": "h3",
+                          "attrs": {},
+                          "children": [
+                            "回应策略与可编辑输入"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "追问主线、挖掘线索与其他倾向提供不同交流方向。点击策略先填入输入框，玩家可以修改，再决定发送。"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "subsection"
+              },
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "探索的乐趣来自理解具体的人，而不只是完成问答"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "measure"
+                  },
+                  "children": [
+                    "委托者先讲生活情境，玩家从中选择值得追问的内容。例如原稿中的预算追问，得到了“预算不太高，也要方便使用”的回复，并触发低预算偏好的发现。"
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "grid two discovery"
+                  },
+                  "children": [
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h4",
+                          "attrs": {},
+                          "children": [
+                            "生活描述保留探索空间"
+                          ]
+                        },
+                        {
+                          "tag": "figure",
+                          "attrs": {
+                            "data-image": "10",
+                            "data-caption": "描述中的线索被突出，提示可以继续追问"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "“舍不得扔的旧物”等生活信息先作为交流线索出现，不直接变成完整的装修清单。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h4",
+                          "attrs": {},
+                          "children": [
+                            "追问后反馈具体发现"
+                          ]
+                        },
+                        {
+                          "tag": "figure",
+                          "attrs": {
+                            "data-image": "09",
+                            "data-caption": "预算追问后的回复与低预算发现提示"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "新发现贴近产生它的回复，玩家可以理解这次交流增加了哪项设计要求。"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "grid two subsection"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "建议提供方向，表达仍由玩家决定"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "11",
+                        "data-caption": "三种回应策略与下方输入区；英文为原稿占位文案"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "建议不是点击即发送的固定答案。预填后仍可编辑，玩家能沿推荐方向展开，也能用自己的表达继续追问。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "发现结果进入可反复查阅的任务记录"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "07",
+                        "data-caption": "展开偏好分类：已发现内容与暂未发现状态"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "收起时将最新发现排在前面；展开时回到四类结构。新偏好的飞入反馈指向对应分类，而非仅播放一次脱离任务的庆祝动画。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n",
+            {
+              "tag": "div",
+              "attrs": {
+                "id": "discovery-motion",
+                "class": "live-demo",
+                "data-demo": "discovery"
+              },
+              "children": []
+            },
+            "\n"
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap chapter",
+        "id": "dialogue-states"
+      },
+      "children": [
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "section-heading"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {
+                "class": "section-no"
+              },
+              "children": [
+                "对话状态"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "区分处理等待、探索结束与异常恢复"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "lead"
+                  },
+                  "children": [
+                    "等待回复与生成建议是不同处理阶段；轮次耗尽与信任终止则属于玩法条件。相同区域按当前原因展示反馈，避免所有中断都被理解为 AI 仍在思考。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "grid two"
+          },
+          "children": [
+            {
+              "tag": "article",
+              "attrs": {
+                "class": "state"
+              },
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "等待委托者回复"
+                  ]
+                },
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "14",
+                    "data-caption": "正在等待对方回复"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "发送后隐藏回应选项，同时在聊天记录中显示加载气泡，等待当前回复。"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "article",
+              "attrs": {
+                "class": "state"
+              },
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "正在生成回应选项"
+                  ]
+                },
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "15",
+                    "data-caption": "回复已出现，下一步建议仍在生成"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "将“委托者正在说话”和“系统准备回应建议”分开表达，生成结束后再显示策略选项。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "grid three subsection"
+          },
+          "children": [
+            {
+              "tag": "article",
+              "attrs": {
+                "class": "state"
+              },
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "全部偏好已发现"
+                  ]
+                },
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "12",
+                    "data-caption": "探索完成提示"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "隐藏继续追问的选项，提示进入设计阶段，明确此时可以结束探索。"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "article",
+              "attrs": {
+                "class": "state"
+              },
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "对话轮次耗尽"
+                  ]
+                },
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "13",
+                    "data-caption": "轮次耗尽提示"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "说明当前无法继续对话，而不让空白的回应区看起来像加载失败。"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "article",
+              "attrs": {
+                "class": "state"
+              },
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "失去委托者信任"
+                  ]
+                },
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "16",
+                    "data-caption": "玩法终止与重新对话入口"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "指出中断的玩法原因，并提供重新对话入口，与普通等待状态区分。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "error-row subsection"
+          },
+          "children": [
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "网络失败保留在原对话位置恢复"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "通过“小镇信号有点弱”的表达保持产品语气，重试入口紧邻失败回复；重试后回到加载状态。"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "figure",
+              "attrs": {
+                "data-image": "35",
+                "data-caption": "回复发送失败与重试"
+              },
+              "children": []
+            }
+          ]
+        },
+        "\n"
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "transition-band"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "wrap chapter"
+          },
+          "children": [
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "strategy-title"
+              },
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "package-open"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "阶段衔接 · 保留已知目标，区分两种进度"
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "h2",
+              "attrs": {},
+              "children": [
+                "发现偏好决定可获得什么，",
+                {
+                  "tag": "br",
+                  "attrs": {},
+                  "children": []
+                },
+                "满足偏好决定最终获得多少"
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "lead measure"
+              },
+              "children": [
+                "如果两阶段都只显示一个百分比，玩家容易将“已了解”当成“已完成”。因此，对话阶段积累宝箱；进入装修后，以满足偏好获得开箱工具，把实际奖励与设计表现联系起来。"
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "grid two reward-panels"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "对话：逐步解锁宝箱"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "01",
+                        "data-caption": "亮起与未解锁宝箱区分当前奖励上限"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "偏好发现达到对应档位时，宝箱状态变化，提前建立继续探索的奖励预期。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "装修：在已知上限内推进"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "02",
+                        "data-caption": "绿色保留发现上限，橙色显示满足进度"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "进入装修后，绿色上限固定；满足进度继续变化，开箱工具对应本阶段可兑现的奖励。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "handover"
+              },
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "door-open"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "结束沟通是一次明确的阶段决策"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "确认前说明：“进入委托设计后，不可再与雇主沟通，确认进入？”确认后进入装修并开始计时。偏好记录保留，交流入口退出当前操作体系。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n"
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap chapter",
+        "id": "design"
+      },
+      "children": [
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "strategy-title blue"
+          },
+          "children": [
+            {
+              "tag": "i",
+              "attrs": {
+                "data-lucide": "armchair"
+              },
+              "children": []
+            },
+            {
+              "tag": "span",
+              "attrs": {},
+              "children": [
+                "装修挑战 · 围绕已知偏好做设计"
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "section-heading"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {
+                "class": "section-no"
+              },
+              "children": [
+                "阶段二 / 完整界面"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "目标、空间与操作保持在同一个决策范围"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "lead"
+                  },
+                  "children": [
+                    "顶部回答“还要满足什么”，中间呈现实际房间，底部提供家具选择。预算和时间位于空间与选购区之间，玩家在布置时能够持续看到任务限制。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "layout"
+          },
+          "children": [
+            {
+              "tag": "figure",
+              "attrs": {
+                "class": "full-screen",
+                "data-image": "18",
+                "data-caption": "装修阶段完整界面：目标、房间、资源限制与家具列表"
+              },
+              "children": []
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "regions"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "01"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "目标与奖励进度"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "同一位置延续对话阶段的偏好记录，但状态由“发现”转为“满足”。面板可展开查看全部类别，收起后不遮挡主要空间。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "02"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "以家具为中心的编辑"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "选中对象后，在家具周围提供移动、旋转、收起和确认等操作，使操作对象与工具之间的关系明确。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "03"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "预算和时间限制"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "预算耗尽、剩余时间不足时强化提醒。购买前校验预算，避免玩家布置完成后才发现无法承担费用。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "04"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "与设计变化关联的推荐"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "家具确认摆放后刷新推荐；推荐生成期间显示加载并弱化刷新按钮，避免重复操作。收起家具不触发同一刷新流程。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "subsection"
+          },
+          "children": [
+            {
+              "tag": "h3",
+              "attrs": {},
+              "children": [
+                "完成标签需要被看见，未完成目标也不能被挤走"
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "measure"
+              },
+              "children": [
+                "完成项点亮并按达成顺序排列，未完成项保留原始顺序。接近收尾、仅剩三个未点亮目标时，视野同时保留待完成目标与最新完成项，避免每次更新都只展示已经做完的内容。"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "grid two"
+              },
+              "children": [
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "19",
+                    "data-caption": "收起态：已满足与未满足标签同列呈现"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "data-image": "20",
+                    "data-caption": "展开态：分类、最在意标记与未发现状态"
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "rule-strip"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "收尾定位规则"
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "b",
+                      "attrs": {
+                        "class": "done"
+                      },
+                      "children": [
+                        "最新完成"
+                      ]
+                    },
+                    {
+                      "tag": "b",
+                      "attrs": {},
+                      "children": [
+                        "待完成 1"
+                      ]
+                    },
+                    {
+                      "tag": "b",
+                      "attrs": {},
+                      "children": [
+                        "待完成 2"
+                      ]
+                    },
+                    {
+                      "tag": "b",
+                      "attrs": {},
+                      "children": [
+                        "待完成 3"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {},
+                  "children": [
+                    "规则示意：优先保留完成与未完成的交界。"
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "small-note"
+              },
+              "children": [
+                "“最在意”仅标记偏好数量唯一最多的类别，并列时不强行排序。"
+              ]
+            }
+          ]
+        },
+        "\n"
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "band",
+        "id": "feedback"
+      },
+      "children": [
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "wrap chapter"
+          },
+          "children": [
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "strategy-title"
+              },
+              "children": [
+                {
+                  "tag": "i",
+                  "attrs": {
+                    "data-lucide": "sparkles"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "span",
+                  "attrs": {},
+                  "children": [
+                    "动效反馈 · 将操作变化与任务进展联系起来"
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "section-heading"
+              },
+              "children": [
+                {
+                  "tag": "span",
+                  "attrs": {
+                    "class": "section-no"
+                  },
+                  "children": [
+                    "家具操作"
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h2",
+                      "attrs": {},
+                      "children": [
+                        "费用反馈发生在家具变化的位置"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {
+                        "class": "lead"
+                      },
+                      "children": [
+                        "选中家具、确认摆放与收起是不同状态。确认后才扣款，收起时退款；飘字靠近对象出现，让费用变化有明确的操作来源。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "operation-map"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "strong",
+                      "attrs": {},
+                      "children": [
+                        "选择家具"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "先校验预算，超预算时提示并拦截。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "strong",
+                      "attrs": {},
+                      "children": [
+                        "场景生成并选中"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "移动、旋转、缩放，调整后决定是否保留。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "strong",
+                      "attrs": {},
+                      "children": [
+                        "确认摆放"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "家具留在房间 → 扣款 → 更新推荐。"
+                      ]
+                    },
+                    {
+                      "tag": "hr",
+                      "attrs": {},
+                      "children": []
+                    },
+                    {
+                      "tag": "strong",
+                      "attrs": {},
+                      "children": [
+                        "收起已购家具"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "移除家具 → 退款；不触发同样的推荐刷新。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "grid three screen-flow"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "选中 · 操作围绕当前家具"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "21",
+                        "data-box": "43,31,43,34",
+                        "data-caption": "完整选中态：家具、工具条与房间中的位置"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "家具以轮廓高亮，移动、旋转、收起和确认等工具紧邻对象；此时仍可继续调整。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "确认 · 摆放和费用同时变化"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "26",
+                        "data-box": "55,40,38,25",
+                        "data-caption": "完整确认态：家具保留、扣款飘字与预算位置"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "确认后取消选中，家具留在场景。扣款飘字对应刚才操作的位置，预算同步变化。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "收起 · 原位置显示退款"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "25",
+                        "data-box": "55,40,38,25",
+                        "data-caption": "完整收起态：家具移除、退款飘字与预算位置"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "收起已购家具时移除对象并返还费用；这是另一条操作分支，不是确认后必须执行的步骤。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "grid two subsection"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "费用飘字局部对照"
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "grid two"
+                      },
+                      "children": [
+                        {
+                          "tag": "figure",
+                          "attrs": {
+                            "data-image": "purchase",
+                            "data-caption": "确认后的扣款"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "figure",
+                          "attrs": {
+                            "data-image": "refund",
+                            "data-caption": "收起后的退款"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "在完整流程之后，对照同一位置的扣款与退款。原有或免费家具不产生对应购买、退款飘字。"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "推荐更新发生在确认之后"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "recommendation-loading",
+                        "data-caption": "家具推荐加载时：列表占位与弱化的刷新入口"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "确认摆放后刷新推荐，生成期间显示加载并弱化刷新按钮。收起家具不触发这一刷新逻辑。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "subsection"
+              },
+              "children": [
+                {
+                  "tag": "h3",
+                  "attrs": {},
+                  "children": [
+                    "先让委托者回应，再将反馈落到任务进度"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "measure"
+                  },
+                  "children": [
+                    "满足偏好时，角色评价说明这次布置回应了什么需要；随后通过光点飞入偏好进度，连接空间变化与目标达成。"
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "grid two screen-flow"
+                  },
+                  "children": [
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "figure",
+                          "attrs": {
+                            "data-image": "22",
+                            "data-box": "8,32,52,11",
+                            "data-caption": "完整反馈界面：角色评价出现于房间内，底部推荐同步加载"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "评价在当前装修空间出现，顶部保留目标，底部仍是选购区，玩家无需退出房间查看反馈。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "figure",
+                          "attrs": {
+                            "data-image": "23",
+                            "data-box": "25,13,34,22",
+                            "data-caption": "完整反馈界面：光点由房间飞向顶部偏好进度"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "飞入的落点对应偏好面板，将角色评价与任务进展联系起来。"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n",
+            {
+              "tag": "div",
+              "attrs": {
+                "id": "placement-motion",
+                "class": "live-demo",
+                "data-demo": "placement"
+              },
+              "children": []
+            },
+            "\n ",
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "motion-demo",
+                "id": "reward-motion"
+              },
+              "children": [
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "motion-top"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "h4",
+                          "attrs": {},
+                          "children": [
+                            "奖励反馈的连续关系"
+                          ]
+                        },
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "动效流程示意 · 非运行录屏"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "button",
+                      "attrs": {
+                        "class": "replay",
+                        "aria-label": "重播奖励反馈示意",
+                        "title": "重播奖励反馈示意"
+                      },
+                      "children": [
+                        {
+                          "tag": "i",
+                          "attrs": {
+                            "data-lucide": "rotate-ccw"
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "motion-track four"
+                  },
+                  "children": [
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "motion-step"
+                      },
+                      "children": [
+                        {
+                          "tag": "i",
+                          "attrs": {
+                            "data-lucide": "check-check"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "满足偏好"
+                          ]
+                        },
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "角色评价与进度变化"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "motion-step"
+                      },
+                      "children": [
+                        {
+                          "tag": "i",
+                          "attrs": {
+                            "data-lucide": "scissors"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "获得开箱工具"
+                          ]
+                        },
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "对应已解锁的宝箱"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "motion-step"
+                      },
+                      "children": [
+                        {
+                          "tag": "i",
+                          "attrs": {
+                            "data-lucide": "package-open"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "开箱展示奖励"
+                          ]
+                        },
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "奖励卡片逐项出现"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "div",
+                      "attrs": {
+                        "class": "motion-step arrival"
+                      },
+                      "children": [
+                        {
+                          "tag": "i",
+                          "attrs": {
+                            "data-lucide": "wallet"
+                          },
+                          "children": []
+                        },
+                        {
+                          "tag": "strong",
+                          "attrs": {},
+                          "children": [
+                            "奖励汇入报酬"
+                          ]
+                        },
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "收束到本次实际所得"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            "\n"
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "section",
+      "attrs": {
+        "class": "wrap chapter",
+        "id": "results"
+      },
+      "children": [
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "section-heading"
+          },
+          "children": [
+            {
+              "tag": "span",
+              "attrs": {
+                "class": "section-no"
+              },
+              "children": [
+                "提交与结算"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {},
+              "children": [
+                {
+                  "tag": "h2",
+                  "attrs": {},
+                  "children": [
+                    "成功说明改变，未完成指出仍需解决的问题"
+                  ]
+                },
+                {
+                  "tag": "p",
+                  "attrs": {
+                    "class": "lead"
+                  },
+                  "children": [
+                    "提交前确认方案将不可再修改。结算同时展示角色反应、偏好结果与报酬；未完成时进一步指出关键缺口，为重新尝试提供具体方向。"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "layout",
+            "data-inspect": "success"
+          },
+          "children": [
+            {
+              "tag": "figure",
+              "attrs": {
+                "class": "full-screen",
+                "data-image": "27",
+                "data-caption": "委托完成完整结算界面"
+              },
+              "children": []
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "regions"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "01"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "先看到装修成果"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "房间完整保留在上方，通过场景与角色反应呈现完成氛围。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "02"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "成果对应委托者的生活期待"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "角色评价描述房间带来的生活变化，偏好结果紧随其后，将设计成果与最初需求联系起来。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "03"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "奖励与后续操作收束结算"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "下方集中展示报酬和返回大厅等操作。此图为带“打包灵感盒”入口的版本。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "layout subsection",
+            "data-inspect": "failure"
+          },
+          "children": [
+            {
+              "tag": "figure",
+              "attrs": {
+                "class": "full-screen",
+                "data-image": "28",
+                "data-caption": "委托未完成完整结算界面"
+              },
+              "children": []
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "regions"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "01"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "未完成的氛围与成功相区分"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "相同房间构图呈现灰暗色调，与失落的角色反应共同表达结果。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "02"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "指出尚未满足的具体要求"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "“夜间通道仍有障碍”“音乐区未完成”提供可继续处理的设计目标，而不只给出较低百分比。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "span",
+                      "attrs": {},
+                      "children": [
+                        "03"
+                      ]
+                    },
+                    {
+                      "tag": "h3",
+                      "attrs": {},
+                      "children": [
+                        "解释所得，并提供重新尝试"
+                      ]
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "奖励结果与“退出委托”“重新设计”放在底部。反馈说明原因后，再由玩家决定是否继续。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "p",
+          "attrs": {
+            "class": "small-note"
+          },
+          "children": [
+            "图中百分比与报酬为界面示例；结算图为金币版本，开箱流程依据奖励优化方案展示。"
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "subsection",
+            "id": "my-commissions"
+          },
+          "children": [
+            {
+              "tag": "h2",
+              "attrs": {},
+              "children": [
+                "我的委托：继续当前设计，或回看已完成作品"
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "measure"
+              },
+              "children": [
+                "大厅中的“我的委托”进入任务管理页。进行中和已完成分区展示，分别对应恢复操作与成果回访。"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "layout",
+                "data-inspect": "mine"
+              },
+              "children": [
+                {
+                  "tag": "figure",
+                  "attrs": {
+                    "class": "full-screen",
+                    "data-image": "30",
+                    "data-caption": "我的委托完整界面：进行中与已完成分区"
+                  },
+                  "children": []
+                },
+                {
+                  "tag": "div",
+                  "attrs": {
+                    "class": "regions"
+                  },
+                  "children": [
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "01"
+                          ]
+                        },
+                        {
+                          "tag": "h3",
+                          "attrs": {},
+                          "children": [
+                            "进行中优先显示当前压力"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "剩余时间、偏好完成度和继续设计入口集中在上方；放弃入口与继续操作区分。"
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "tag": "article",
+                      "attrs": {},
+                      "children": [
+                        {
+                          "tag": "span",
+                          "attrs": {},
+                          "children": [
+                            "02"
+                          ]
+                        },
+                        {
+                          "tag": "h3",
+                          "attrs": {},
+                          "children": [
+                            "已完成转为成果记录"
+                          ]
+                        },
+                        {
+                          "tag": "p",
+                          "attrs": {},
+                          "children": [
+                            "时间由倒计时变为完成日期，显示最终奖励，并提供查看作品入口；列表标明仅展示近30天。"
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "grid two task-cards"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h4",
+                      "attrs": {},
+                      "children": [
+                        "进行中卡片 · 恢复任务"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "31",
+                        "data-caption": "卡片细节：时间、进度、继续与放弃"
+                      },
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h4",
+                      "attrs": {},
+                      "children": [
+                        "已完成卡片 · 查看成果"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "32",
+                        "data-caption": "卡片细节：日期、实际报酬与查看作品"
+                      },
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n ",
+        {
+          "tag": "div",
+          "attrs": {
+            "class": "subsection"
+          },
+          "children": [
+            {
+              "tag": "h3",
+              "attrs": {},
+              "children": [
+                "从完成记录进入作品查看"
+              ]
+            },
+            {
+              "tag": "p",
+              "attrs": {
+                "class": "measure"
+              },
+              "children": [
+                "作品查看保留完整房间；家具清单可展开检查，底部提供发布和打包入口。这一层用于回看成果，不再混入进行中的预算与计时操作。"
+              ]
+            },
+            {
+              "tag": "div",
+              "attrs": {
+                "class": "grid two screen-flow"
+              },
+              "children": [
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h4",
+                      "attrs": {},
+                      "children": [
+                        "完整房间与后续操作"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "33",
+                        "data-box": "2,79,96,20",
+                        "data-caption": "作品查看完整界面：房间、清单入口及发布操作"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "清单收起时保留较大的房间视野，作品与操作入口同时可见。"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "tag": "article",
+                  "attrs": {},
+                  "children": [
+                    {
+                      "tag": "h4",
+                      "attrs": {},
+                      "children": [
+                        "展开家具清单"
+                      ]
+                    },
+                    {
+                      "tag": "figure",
+                      "attrs": {
+                        "data-image": "34",
+                        "data-box": "2,39,96,60",
+                        "data-caption": "作品查看完整界面：家具清单展开态"
+                      },
+                      "children": []
+                    },
+                    {
+                      "tag": "p",
+                      "attrs": {},
+                      "children": [
+                        "同一页面展开使用的家具，便于查看成果构成。"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "\n"
+      ]
+    }
+  ],
+  "dimensions": {
+    "10": {
+      "width": 1019,
+      "height": 285
+    },
+    "11": {
+      "width": 1440,
+      "height": 668
+    },
+    "12": {
+      "width": 1387,
+      "height": 220
+    },
+    "13": {
+      "width": 1387,
+      "height": 220
+    },
+    "14": {
+      "width": 1387,
+      "height": 220
+    },
+    "15": {
+      "width": 1387,
+      "height": 220
+    },
+    "16": {
+      "width": 1387,
+      "height": 252
+    },
+    "17": {
+      "width": 1440,
+      "height": 3122
+    },
+    "18": {
+      "width": 1440,
+      "height": 2559
+    },
+    "19": {
+      "width": 1383,
+      "height": 421
+    },
+    "20": {
+      "width": 1383,
+      "height": 1001
+    },
+    "21": {
+      "width": 1440,
+      "height": 2559
+    },
+    "22": {
+      "width": 1440,
+      "height": 2559
+    },
+    "23": {
+      "width": 1440,
+      "height": 2559
+    },
+    "25": {
+      "width": 1440,
+      "height": 2559
+    },
+    "26": {
+      "width": 1440,
+      "height": 2559
+    },
+    "27": {
+      "width": 1440,
+      "height": 2559
+    },
+    "28": {
+      "width": 1440,
+      "height": 2559
+    },
+    "30": {
+      "width": 1440,
+      "height": 2559
+    },
+    "31": {
+      "width": 1325,
+      "height": 915
+    },
+    "32": {
+      "width": 1325,
+      "height": 915
+    },
+    "33": {
+      "width": 1440,
+      "height": 2560
+    },
+    "34": {
+      "width": 1440,
+      "height": 2560
+    },
+    "35": {
+      "width": 1018,
+      "height": 208
+    },
+    "01": {
+      "width": 1383,
+      "height": 421
+    },
+    "02": {
+      "width": 1383,
+      "height": 421
+    },
+    "04": {
+      "width": 1440,
+      "height": 2560
+    },
+    "05": {
+      "width": 1440,
+      "height": 2559
+    },
+    "06": {
+      "width": 1440,
+      "height": 2559
+    },
+    "07": {
+      "width": 1383,
+      "height": 1001
+    },
+    "08": {
+      "width": 244,
+      "height": 149
+    },
+    "09": {
+      "width": 736,
+      "height": 257
+    },
+    "failure": {
+      "width": 1310,
+      "height": 1290
+    },
+    "feedback-flight": {
+      "width": 1350,
+      "height": 800
+    },
+    "npc-avatar-demo": {
+      "width": 185,
+      "height": 212
+    },
+    "npc-bubble-demo": {
+      "width": 710,
+      "height": 250
+    },
+    "npc-feedback": {
+      "width": 780,
+      "height": 310
+    },
+    "purchase": {
+      "width": 580,
+      "height": 620
+    },
+    "recommendation-loading": {
+      "width": 1395,
+      "height": 510
+    },
+    "refund": {
+      "width": 580,
+      "height": 620
+    },
+    "selected": {
+      "width": 620,
+      "height": 810
+    },
+    "success": {
+      "width": 1310,
+      "height": 1250
+    }
+  }
+}

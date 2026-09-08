@@ -7,3 +7,10 @@ dist
 *.local
 
 .vercel
+
+# Local verification artifacts and raw inputs never belong in a release.
+qa/
+test-results/
+playwright-report/
+*.zip
+*.bundle

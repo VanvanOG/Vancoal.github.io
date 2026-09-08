@@ -53,24 +53,33 @@ export default function StartupLoadingOverlay() {
     }
 
     const minVisibleMs = reducedMotion ? 320 : 900;
-    const exitDuration = reducedMotion ? 180 : 520;
     const elapsed = performance.now() - mountedAtRef.current;
     const startExitDelay = Math.max(minVisibleMs - elapsed, 0);
-    let hideTimer = 0;
 
     const exitTimer = window.setTimeout(() => {
       setIsExiting(true);
       document.documentElement.classList.remove("is-startup-loading");
-      hideTimer = window.setTimeout(() => {
-        setIsHidden(true);
-      }, exitDuration);
     }, startExitDelay);
 
     return () => {
       window.clearTimeout(exitTimer);
-      window.clearTimeout(hideTimer);
     };
   }, [isExiting, isHidden, preloadState.isDone, reducedMotion]);
+
+  useEffect(() => {
+    if (!isExiting || isHidden) {
+      return undefined;
+    }
+
+    const exitDuration = reducedMotion ? 180 : 520;
+    const hideTimer = window.setTimeout(() => {
+      setIsHidden(true);
+    }, exitDuration);
+
+    return () => {
+      window.clearTimeout(hideTimer);
+    };
+  }, [isExiting, isHidden, reducedMotion]);
 
   if (isHidden) {
     return null;

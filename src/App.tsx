@@ -4,6 +4,7 @@ import ScrollToHash from "./components/ScrollToHash";
 import StartupLoadingOverlay from "./components/StartupLoadingOverlay";
 import HomePage from "./pages/HomePage";
 import ProjectDetailPage from "./pages/ProjectDetailPage";
+import AdventureCursor from "./components/AdventureCursor";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
       <StartupLoadingOverlay />
+      <AdventureCursor />
     </ProjectRouteTransitionProvider>
   );
 }

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>黑幕波浪调参台</title>
+    <style>
+      :root { color-scheme: dark; font-family: Inter, "Microsoft YaHei", sans-serif; background: #101010; color: #f3f3ef; }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-width: 980px; background: #101010; }
+      main { display: grid; grid-template-columns: minmax(580px, 1.45fr) minmax(360px, .8fr); min-height: 100vh; }
+      .stage { position: sticky; top: 0; display: grid; min-height: 100vh; place-items: center; padding: 42px; background: radial-gradient(circle at 20% 12%, #292929, #111 55%); }
+      .preview-frame { width: min(100%, 960px); overflow: hidden; border: 1px solid #454545; border-radius: 18px; background: #f4f4f1; box-shadow: 0 24px 80px #0008; }
+      svg { display: block; width: 100%; aspect-ratio: 16 / 9; }
+      .preview-note { display: flex; justify-content: space-between; padding: 13px 16px; background: #161616; color: #aaa; font-size: 12px; letter-spacing: .05em; }
+      .panel { padding: 34px 30px 46px; border-left: 1px solid #323232; background: #181818; }
+      h1 { margin: 0; font-size: 27px; letter-spacing: -.03em; }
+      .lead { margin: 10px 0 27px; color: #aaa; font-size: 13px; line-height: 1.6; }
+      .preset-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 22px; }
+      button { appearance: none; border: 1px solid #484848; border-radius: 10px; padding: 10px 8px; background: #242424; color: #ddd; cursor: pointer; font: inherit; font-size: 12px; }
+      button:hover, button.is-active { border-color: #ff8d4d; background: #35251d; color: #fff; }
+      .section-title { margin: 25px 0 12px; color: #ff9b62; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+      .control { display: grid; grid-template-columns: 1fr 54px; gap: 10px; align-items: center; margin: 12px 0; }
+      .control label { display: block; grid-column: 1 / -1; color: #dedede; font-size: 13px; }
+      input[type="range"] { width: 100%; accent-color: #ff8d4d; }
+      output { text-align: right; color: #ffb084; font-size: 12px; font-variant-numeric: tabular-nums; }
+      .code { margin-top: 24px; padding: 13px; border: 1px solid #353535; border-radius: 12px; background: #111; color: #b9e4c9; font: 12px/1.55 ui-monospace, Consolas, monospace; white-space: pre-wrap; }
+      .actions { display: flex; gap: 9px; margin-top: 11px; }
+      .actions button { flex: 1; }
+      .hint { margin-top: 16px; color: #777; font-size: 12px; line-height: 1.5; }
+      @media (max-width: 980px) { body { min-width: 0; } main { grid-template-columns: 1fr; } .stage { position: relative; min-height: auto; padding: 20px; } .panel { border-left: 0; border-top: 1px solid #323232; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="stage" aria-label="波浪预览">
+        <div class="preview-frame">
+          <svg viewBox="0 0 1920 1080" preserveAspectRatio="none" aria-label="黑幕波浪预览">
+            <rect width="1920" height="1080" fill="#f7f7f4" />
+            <path id="wave-fill" fill="#000" />
+          </svg>
+          <div class="preview-note"><span>LIVE WAVE PREVIEW</span><span id="lobe-readout">2.5 LOBES</span></div>
+        </div>
+      </section>
+      <aside class="panel">
+        <h1>黑幕波浪调参台</h1>
+        <p class="lead">调出你想要的曲线后，复制下方参数发给我。我会用同一组值替换正式网站的转场波浪。</p>
+        <div class="preset-grid" aria-label="预设方案">
+          <button data-preset="soft" class="is-active">A 柔和</button>
+          <button data-preset="drama">B 高低分明</button>
+          <button data-preset="quiet">C 克制</button>
+        </div>
+        <div class="section-title">推进状态</div>
+        <div id="controls"></div>
+        <div class="section-title">可复制参数</div>
+        <div id="json" class="code"></div>
+        <div class="actions"><button id="copy">复制参数</button><button id="pause">暂停预览</button></div>
+        <p class="hint">建议先调“波峰 1 / 2 / 3 高度”和“圆润度”，再调整速度。预览中的黑幕位置也可单独拖动。</p>
+      </aside>
+    </main>
+    <script type="module">
+      import { DEFAULT_WAVE_SETTINGS, sampleWavePoints, createSmoothWavePath } from "./wave-playground-model.mjs";
+
+      const presets = {
+        soft: { lobeHeights: [0.66, 1, 0.76], amplitude: 148, smoothness: 0.9, speed: 0.78 },
+        drama: { lobeHeights: [0.52, 1.12, 0.7], amplitude: 174, smoothness: 0.95, speed: 0.9 },
+        quiet: { lobeHeights: [0.72, 0.9, 0.68], amplitude: 112, smoothness: 0.82, speed: 0.62 },
+      };
+      const settings = { ...DEFAULT_WAVE_SETTINGS, lobeHeights: [...DEFAULT_WAVE_SETTINGS.lobeHeights], position: 0.5 };
+      const controls = [
+        ["progress", "2 → 3 过渡", 0, 1, 0.01], ["position", "黑幕推进位置", 0, 1, 0.01],
+        ["amplitude", "整体起伏高度", 50, 220, 1], ["smoothness", "圆润度", 0.55, 1, 0.01],
+        ["speed", "起伏速度", 0, 1.6, 0.01], ["startLobes", "起始波浪数量", 1, 3, 0.01], ["endLobes", "结束波浪数量", 2, 4, 0.01],
+        ["height0", "波峰 1 高度", 0.35, 1.3, 0.01], ["height1", "波峰 2 高度", 0.35, 1.3, 0.01], ["height2", "波峰 3 高度", 0.35, 1.3, 0.01],
+      ];
+      const controlHost = document.querySelector("#controls");
+      const waveFill = document.querySelector("#wave-fill");
+      const json = document.querySelector("#json");
+      const lobeReadout = document.querySelector("#lobe-readout");
+      let playing = true;
+      let startedAt = performance.now();
+
+      function valueOf(key) { return key.startsWith("height") ? settings.lobeHeights[Number(key.at(-1))] : settings[key]; }
+      function setValue(key, value) { if (key.startsWith("height")) settings.lobeHeights[Number(key.at(-1))] = value; else settings[key] = value; }
+      function readable(value) { return Number(value).toFixed(Number(value) < 2 ? 2 : 0).replace(/\.00$/, ""); }
+      function buildControls() {
+        controls.forEach(([key, label, min, max, step]) => {
+          const row = document.createElement("div"); row.className = "control";
+          row.innerHTML = `<label for="${key}">${label}</label><input id="${key}" type="range" min="${min}" max="${max}" step="${step}" value="${valueOf(key)}"><output></output>`;
+          const input = row.querySelector("input"); const output = row.querySelector("output");
+          const refresh = () => { setValue(key, Number(input.value)); output.textContent = readable(input.value); render(); };
+          input.addEventListener("input", refresh); refresh(); controlHost.append(row);
+        });
+      }
+      function render() {
+        const previewSettings = { ...settings, elapsedSeconds: settings.elapsedSeconds ?? 0, lobeHeights: [...settings.lobeHeights] };
+        const shape = sampleWavePoints(previewSettings);
+        const baseX = 2200 - settings.position * 2500;
+        waveFill.setAttribute("d", createSmoothWavePath(baseX, shape.points, settings.smoothness));
+        lobeReadout.textContent = `${shape.lobeCount.toFixed(2)} LOBES`;
+        json.textContent = JSON.stringify({
+          startLobes: Number(settings.startLobes.toFixed(2)), endLobes: Number(settings.endLobes.toFixed(2)), progress: Number(settings.progress.toFixed(2)), position: Number(settings.position.toFixed(2)), amplitude: settings.amplitude, smoothness: Number(settings.smoothness.toFixed(2)), speed: Number(settings.speed.toFixed(2)), lobeHeights: settings.lobeHeights.map((value) => Number(value.toFixed(2))),
+        }, null, 2);
+      }
+      function animate(now) { if (playing) { settings.elapsedSeconds = (now - startedAt) / 1000; render(); } requestAnimationFrame(animate); }
+      document.querySelectorAll("[data-preset]").forEach((button) => button.addEventListener("click", () => {
+        Object.assign(settings, presets[button.dataset.preset], { lobeHeights: [...presets[button.dataset.preset].lobeHeights] });
+        document.querySelectorAll("[data-preset]").forEach((item) => item.classList.toggle("is-active", item === button));
+        controlHost.replaceChildren(); buildControls(); render();
+      }));
+      document.querySelector("#pause").addEventListener("click", (event) => { playing = !playing; event.currentTarget.textContent = playing ? "暂停预览" : "播放预览"; if (playing) startedAt = performance.now() - settings.elapsedSeconds * 1000; });
+      document.querySelector("#copy").addEventListener("click", async (event) => { const text = json.textContent; try { await navigator.clipboard.writeText(text); event.currentTarget.textContent = "已复制"; } catch { event.currentTarget.textContent = "请手动复制"; } setTimeout(() => { event.currentTarget.textContent = "复制参数"; }, 1300); });
+      buildControls(); requestAnimationFrame(animate);
+    </script>
+  </body>
+</html>

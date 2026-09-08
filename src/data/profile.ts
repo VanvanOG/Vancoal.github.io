@@ -3,7 +3,7 @@ import type { ProfileGroup, ProfileItem } from "../types";
 export const profile = {
   name: "钟成龙",
   mark: "CHENGLONG ZHONG / VANCOAL",
-  role: "AI + Game Interaction Designer",
+  role: "AI + Game UX Designer",
   email: "vancoal@163.com",
   headline:
     "擅长 AI 与游戏产品体验设计，能从玩家心理、复杂系统、商业化活动和数据验证角度推动 0 到 1 产品体验落地。",

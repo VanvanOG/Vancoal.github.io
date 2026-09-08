@@ -2,16 +2,22 @@
   position: fixed;
   z-index: 40;
   top: 0;
-  left: 50%;
-  display: grid;
-  width: min(100% - 48px, var(--max-width));
+  left: 0;
+  display: block;
+  width: 100%;
   height: var(--nav-height);
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  transform: translateX(-50%);
   border-bottom: 1px solid rgba(201, 209, 207, 0.78);
   background: rgba(242, 243, 239, 0.78);
   backdrop-filter: blur(18px);
+}
+
+.site-nav-inner {
+  display: grid;
+  width: min(100% - 48px, var(--max-width));
+  height: 100%;
+  margin: 0 auto;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
 }
 
 .nav-mark {
@@ -244,6 +250,7 @@
 }
 
 html.is-home-project-panel .site-nav {
+  z-index: 70;
   border-bottom-color: rgba(255, 255, 255, 0.14);
   background: rgba(3, 3, 3, 0.76);
 }
@@ -325,6 +332,39 @@ html.is-home-project-panel .nav-mark small {
   color: var(--text-muted);
   font-size: 17px;
   line-height: 1.8;
+}
+
+.hero-project-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  margin-top: 20px;
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--text-soft);
+  color: #ffffff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 180ms ease, gap 180ms ease, opacity 180ms ease;
+}
+
+.hero-project-trigger span {
+  color: currentColor;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.hero-project-trigger:hover:not(:disabled) {
+  background: var(--text);
+}
+
+.hero-project-trigger:disabled {
+  cursor: default;
+  opacity: 0.42;
 }
 
 .hero-status {
@@ -861,6 +901,89 @@ html.is-project-route-entering .project-detail-route .project-hero-inner {
   color: rgba(255, 255, 255, 0.58);
 }
 
+.project-intro-canvas,
+.project-wave-wipe {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 90ms linear;
+}
+
+.project-intro-canvas {
+  z-index: 49;
+}
+
+.project-wave-wipe {
+  z-index: 50;
+}
+
+.project-intro-canvas.is-visible,
+.project-wave-wipe.is-visible {
+  opacity: 1;
+}
+
+.project-intro-project-layer {
+  position: fixed;
+  z-index: 60;
+  inset: 0;
+  display: flex;
+  align-items: stretch;
+  padding: var(--nav-height) 0 34px;
+  background: transparent;
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.project-intro-project-layer.is-interactive {
+  background: #000000;
+  pointer-events: auto;
+}
+
+.project-intro-project-layer .project-panel-shell {
+  display: grid;
+  align-content: start;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: clamp(20px, 4vh, 44px);
+  height: 100%;
+  padding-top: clamp(72px, 8vh, 96px);
+}
+
+.project-intro-project-layer .project-panel-heading,
+.project-intro-project-layer .project-video-showcase {
+  opacity: 0;
+  filter: blur(8px);
+  transform: translate3d(0, 44px, 0);
+  transition:
+    opacity 380ms ease,
+    filter 420ms ease,
+    transform 560ms cubic-bezier(0.16, 0.86, 0.2, 1);
+}
+
+.project-intro-project-layer.is-content-visible .project-panel-heading,
+.project-intro-project-layer.is-content-visible .project-video-showcase {
+  opacity: 1;
+  filter: none;
+  transform: translate3d(0, 0, 0);
+}
+
+.project-intro-project-layer .project-video-showcase {
+  transition-delay: 80ms;
+}
+
+.project-intro-project-layer.is-project-selecting .project-panel-heading {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translate3d(0, -34px, 0);
+}
+
+html.is-project-intro-transitioning .site-nav {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .project-video-showcase {
   display: grid;
   min-height: 0;
@@ -942,9 +1065,19 @@ html.is-project-route-entering .project-detail-route .project-hero-inner {
   overflow: hidden;
 }
 
+.project-video-name-zh {
+  display: block;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: clamp(13px, 1vw, 16px);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+}
+
 .project-video-meta-window strong.is-incoming {
   position: absolute;
-  inset: 0 auto auto 0;
+  inset: 0 0 auto 0;
 }
 
 .project-video-nav {
@@ -973,6 +1106,7 @@ html.is-project-route-entering .project-detail-route .project-hero-inner {
 
 .project-video-nav-button,
 .project-video-play {
+  cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.22);
   background: rgba(255, 255, 255, 0.04);
   color: #ffffff;
@@ -997,11 +1131,12 @@ html.is-project-route-entering .project-detail-route .project-hero-inner {
   box-shadow: 0 0 0 1px rgba(243, 107, 22, 0.08), 0 18px 38px rgba(243, 107, 22, 0.08);
 }
 
-.project-video-nav:hover .project-video-nav-button {
+.project-video-nav:has(.magnetic-zone:hover) .magnetic-zone:not(:hover) .project-video-nav-button {
   opacity: 0.44;
 }
 
-.project-video-nav-button:hover {
+.project-video-nav .magnetic-zone:hover .project-video-nav-button,
+.project-video-nav-button:focus-visible {
   background:
     linear-gradient(rgba(20, 10, 4, 0.92), rgba(7, 7, 7, 0.92)) padding-box,
     linear-gradient(180deg, #ff6a12 0%, #ff9b45 44%, #ffe0bd 100%) border-box;
@@ -1029,6 +1164,13 @@ html.is-project-route-entering .project-detail-route .project-hero-inner {
 
 .project-video-showcase.is-dragging .project-video-stage {
   cursor: grabbing;
+}
+
+/* Lift only the desktop carousel; preserve the rail and mobile stacking. */
+@media (min-width: 981px) {
+  .project-video-stage {
+    top: calc(-1 * clamp(32px, 5vh, 56px));
+  }
 }
 
 .project-video-slider-viewport {
@@ -1977,7 +2119,7 @@ html.is-project-route-entering .project-detail-route .project-hero-inner {
 }
 
 @media (max-width: 980px) {
-  .site-nav {
+  .site-nav-inner {
     width: calc(100% - 32px);
     grid-template-columns: 1fr auto;
   }
@@ -4624,6 +4766,21 @@ html.is-project-route-entering .project-detail-route .project-hero-inner {
 
   .ai-lab-flow-nodes {
     grid-template-columns: repeat(var(--flow-count), minmax(126px, 1fr));
+  }
+
+  /* Keep the analysis grid within the viewport; wide flows scroll locally. */
+  .ai-lab-analysis-stack {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ai-lab-analysis-stack > * {
+    min-width: 0;
+  }
+
+  .ai-lab-flow-nodes {
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
   }
 }
 

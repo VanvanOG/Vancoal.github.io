@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useRef, useState } f
 import type { CSSProperties, ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Accent } from "../types";
+import CommissionCover from "./CommissionCover";
 
 interface ProjectRouteTransitionInput {
   accent: Accent;
@@ -104,7 +105,7 @@ export function ProjectRouteTransitionProvider({ children }: { children: ReactNo
           }
         >
           <div className="project-open-overlay-media">
-            <video className="project-open-overlay-video" autoPlay loop muted playsInline src={transition.videoSrc} />
+            {transition.videoSrc ? <video className="project-open-overlay-video" autoPlay loop muted playsInline src={transition.videoSrc} /> : <CommissionCover slug={transition.slug} />}
             <span className="project-open-overlay-scrim" />
             <span className="project-open-overlay-label">{transition.label}</span>
           </div>

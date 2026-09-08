@@ -1,0 +1,1 @@
+.commission-cover{width:100%;height:100%;background:#000;color:#f3f1ed;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px}.commission-cover>strong{font-size:clamp(24px,3vw,46px);font-weight:500;letter-spacing:.06em}.commission-cover>span{font-size:13px;color:#a6a4a0}.commission-cover>svg{color:#f3f1ed;margin-bottom:8px}

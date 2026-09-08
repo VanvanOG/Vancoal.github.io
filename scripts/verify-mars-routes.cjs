@@ -1,0 +1,45 @@
+const {chromium}=require('C:/Users/86183/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const out=path.resolve(__dirname,'../qa/mars-migration');
+const base=process.env.DEMO_URL||'http://127.0.0.1:5174/';
+(async()=>{
+  const browser=await chromium.launch();
+  const report={routes:[],wave:false,video:false,errors:[]};
+  try {
+    const page=await browser.newPage({viewport:{width:1440,height:1000}});
+    page.on('pageerror',e=>report.errors.push(String(e)));
+    await page.goto(base);
+    await page.locator('.startup-loading').waitFor({state:'hidden',timeout:45000});
+    await page.getByRole('button',{name:'查看项目'}).click();
+    await page.locator('.project-wave-wipe.is-visible').waitFor();
+    const waveA=await page.locator('.project-wave-wipe path').getAttribute('d');
+    await page.waitForFunction(a=>document.querySelector('.project-wave-wipe path').getAttribute('d')!==a,waveA);
+    report.wave=true;
+    await page.locator('.project-intro-project-layer.is-interactive').waitFor();
+    await page.waitForFunction(()=>{const video=document.querySelector('.project-video-slide.is-active-slot video');return video && video.readyState>=2 && !video.paused && video.currentTime>.15;});
+    report.video=true;
+    await page.getByRole('button',{name:'Open 火星纪元',exact:true}).click();
+    await page.waitForURL('**/#/projects/mars-era');
+    await page.getByRole('heading',{name:'火星纪元',exact:true}).waitFor();
+    await page.locator('.back-link').click();
+    await page.locator('.project-intro-project-layer.is-interactive').waitFor();
+    report.routes.push('home → animated wave → carousel → mars-era → carousel');
+    await page.getByRole('button',{name:'Next project'}).click();
+    await page.getByRole('button',{name:/Open/}).click();
+    await page.waitForURL('**/#/projects/habitat-ai-dialogue');
+    assert.ok(await page.locator('h1').innerText());
+    await page.screenshot({path:path.join(out,'regression-habitat.png')});
+    await page.locator('.ai-back').click();
+    await page.locator('.project-intro-project-layer.is-interactive').waitFor();
+    await page.getByRole('button',{name:'Previous project'}).click();
+    await page.getByRole('button',{name:/Open/}).click();
+    await page.waitForURL('**/#/projects/ai-design-lab');
+    assert.ok(await page.locator('h1').innerText());
+    await page.screenshot({path:path.join(out,'regression-ai-lab.png')});
+    report.routes.push('carousel → habitat-ai-dialogue → carousel → ai-design-lab');
+    assert.deepEqual(report.errors,[]);
+  } finally {fs.writeFileSync(path.join(out,'routes-report.json'),JSON.stringify(report,null,2));await browser.close();}
+  console.log(JSON.stringify(report,null,2));
+})().catch(e=>{console.error(e);process.exitCode=1});

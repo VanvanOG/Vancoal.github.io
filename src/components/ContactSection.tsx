@@ -1,6 +1,7 @@
 import { Mail, Send } from "lucide-react";
 import { profile } from "../data/profile";
 import ControllerHints from "./ControllerHints";
+import MagneticLink from "./MagneticLink";
 
 export default function ContactSection() {
   return (
@@ -10,15 +11,15 @@ export default function ContactSection() {
           <span className="kicker-line" />
           Contact
         </span>
-        <h2 id="contact-title">Ready for the next interaction system.</h2>
+        <h2 id="contact-title">Let’s make something great together.</h2>
         <p>
-          基础版暂以邮箱作为主要联系方式。后续可以按投递场景增加 PDF、电话或更多外链入口。
+          很高兴你看到了这里。如果你有合适的工作机会、想一起做的项目，或只是想聊聊设计，欢迎给我写信。
         </p>
-        <a className="primary-link contact-mail" href={`mailto:${profile.email}`}>
+        <MagneticLink className="primary-link contact-mail" href={`mailto:${profile.email}`}>
           <Mail aria-hidden="true" size={19} />
           <span>{profile.email}</span>
-          <Send aria-hidden="true" size={18} />
-        </a>
+          <Send className="contact-send-icon" aria-hidden="true" size={18} />
+        </MagneticLink>
         <div className="contact-tags" aria-label="Role tags">
           <span>AI-UCG</span>
           <span>Game UX</span>
@@ -26,7 +27,7 @@ export default function ContactSection() {
           <span>Data Evidence</span>
         </div>
       </div>
-      <ControllerHints left="RETURN TO TOP" right="SEND MAIL" />
+      <ControllerHints left="SCROLL TO SWITCH PAGES" shortcutPage="contact" />
     </section>
   );
 }

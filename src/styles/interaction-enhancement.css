@@ -1,0 +1,45 @@
+/* Native cursor stays available until the global follower is initialized. */
+html.adventure-cursor-active,
+html.adventure-cursor-active *,
+html.adventure-cursor-active *::before,
+html.adventure-cursor-active *::after { cursor:none!important; }
+.adventure-cursor-ring,.adventure-cursor-dot {
+  position:fixed;left:0;top:0;pointer-events:none!important;z-index:2147483646;
+  opacity:0;will-change:transform;translate:-50% -50%;border-radius:50%;
+}
+.adventure-cursor-ring {
+  width:var(--cursor-size);height:var(--cursor-size);border:var(--cursor-stroke) solid #e8893a;
+  box-shadow:0 0 0 1px rgb(20 16 10 / .28),inset 0 0 0 1px rgb(255 250 235 / .18);
+  color:#e8893a;display:grid;place-items:center;transition:scale 160ms,border-radius 160ms;
+}
+.adventure-cursor-dot { width:var(--cursor-dot);height:var(--cursor-dot);background:#e8893a;box-shadow:0 0 0 1px rgb(20 16 10 / .35); }
+.adventure-cursor-ring>span { display:none;font:700 19px/1 Arial,sans-serif; }
+.adventure-cursor-ring[data-kind="action"] { scale:1.2; }
+.adventure-cursor-ring[data-kind="drag"]>span { display:block; }
+.adventure-cursor-ring[data-held="true"] { scale:.8; }
+.adventure-cursor-ring[data-kind="play"] {
+  border-color:transparent;box-shadow:none;border-radius:6px;scale:1.2;
+  background:linear-gradient(#e8893a,#e8893a) left top/9px 2px no-repeat,linear-gradient(#e8893a,#e8893a) left top/2px 9px no-repeat,
+  linear-gradient(#e8893a,#e8893a) right top/9px 2px no-repeat,linear-gradient(#e8893a,#e8893a) right top/2px 9px no-repeat,
+  linear-gradient(#e8893a,#e8893a) left bottom/9px 2px no-repeat,linear-gradient(#e8893a,#e8893a) left bottom/2px 9px no-repeat,
+  linear-gradient(#e8893a,#e8893a) right bottom/9px 2px no-repeat,linear-gradient(#e8893a,#e8893a) right bottom/2px 9px no-repeat;
+}
+.hero-project-trigger>.magnetic-content { display:inline-flex;align-items:center;gap:18px;font-size:inherit; }
+.hero-status .magnetic-zone.hero-reveal { clip-path:none;overflow:visible;animation-name:hero-control-reveal-up; }
+@keyframes hero-control-reveal-up { to { filter:blur(0);opacity:1;transform:translate3d(0,0,0); } }
+.contact-mail-zone { width:fit-content;margin-top:38px;overflow:visible; }
+.contact-mail-zone .contact-mail { margin-top:0; }
+.contact-mail .contact-send-icon { transition:translate 180ms; }
+.contact-mail:hover .contact-send-icon { translate:4px 0; }
+.hero-status .hero-project-trigger:hover:not(:disabled),
+.primary-link.contact-mail:hover { background:#303c3d; }
+.hero-project-trigger .hero-trigger-arrow { display:inline-block;transition:translate 180ms; }
+.hero-project-trigger:hover:not(:disabled) .hero-trigger-arrow { translate:4px 0; }
+.keycap-round.is-shortcut-pressed { background:#e8893a;color:#151413; }
+@media(prefers-reduced-motion:reduce),(hover:none),(pointer:coarse) {
+  .adventure-cursor-ring,.adventure-cursor-dot { opacity:0!important;display:none; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .contact-mail .contact-send-icon { transition:none;translate:none!important; }
+  .hero-project-trigger .hero-trigger-arrow { transition:none;translate:none!important; }
+}

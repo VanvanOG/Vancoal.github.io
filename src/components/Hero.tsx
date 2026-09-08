@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { profile } from "../data/profile";
 import { publicPath } from "../utils/publicPath";
 import ControllerHints from "./ControllerHints";
+import MagneticButton from "./MagneticButton";
 
 const HERO_FRAME_COUNT = 98;
 const HERO_FRAME_SOURCES = Array.from(
@@ -11,11 +12,32 @@ const HERO_FRAME_SOURCES = Array.from(
 const FRAME_SCRUB_EASE = 0.18;
 const DPR_CAP = 1.5;
 
-export default function Hero() {
+interface HeroProps {
+  forceFinalFrame?: boolean;
+  interactionLocked?: boolean;
+  onViewProjects?: () => void;
+}
+
+export default function Hero({
+  forceFinalFrame = false,
+  interactionLocked = false,
+  onViewProjects,
+}: HeroProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const targetFrameRef = useRef((HERO_FRAME_COUNT - 1) / 2);
   const currentFrameRef = useRef((HERO_FRAME_COUNT - 1) / 2);
   const hasPointerRef = useRef(false);
+  const forceFinalFrameRef = useRef(forceFinalFrame);
+  const interactionLockedRef = useRef(interactionLocked);
+
+  useEffect(() => {
+    forceFinalFrameRef.current = forceFinalFrame;
+    interactionLockedRef.current = interactionLocked;
+
+    if (forceFinalFrame) {
+      targetFrameRef.current = HERO_FRAME_COUNT - 1;
+    }
+  }, [forceFinalFrame, interactionLocked]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -194,6 +216,10 @@ export default function Hero() {
     };
 
     const syncTargetFromX = (x: number) => {
+      if (interactionLockedRef.current || forceFinalFrameRef.current) {
+        return;
+      }
+
       const progress = Math.max(0, Math.min(1, x / window.innerWidth));
       targetFrameRef.current = progress * (HERO_FRAME_COUNT - 1);
       hasPointerRef.current = true;
@@ -209,7 +235,9 @@ export default function Hero() {
         return;
       }
 
-      if (coarsePointer.matches && !hasPointerRef.current) {
+      if (forceFinalFrameRef.current) {
+        targetFrameRef.current = HERO_FRAME_COUNT - 1;
+      } else if (coarsePointer.matches && !hasPointerRef.current) {
         const centerFrame = (HERO_FRAME_COUNT - 1) / 2;
         targetFrameRef.current = centerFrame + Math.sin(time * 0.00045) * 3;
       }
@@ -259,17 +287,22 @@ export default function Hero() {
             </div>
             <div className="hero-reveal hero-reveal-6">
               <dt>FOCUS</dt>
-              <dd>SYSTEM / AI / DATA</dd>
-            </div>
-            <div className="hero-reveal hero-reveal-7">
-              <dt>MODE</dt>
-              <dd>PORTFOLIO BASE</dd>
+              <dd>SYSTEM / AI / DATA / EXPERIENCE</dd>
             </div>
           </dl>
+          <MagneticButton
+            className="hero-project-trigger"
+            zoneClassName="hero-reveal hero-reveal-7"
+            type="button"
+            onClick={onViewProjects}
+            disabled={interactionLocked || !onViewProjects}
+          >
+            查看项目 <span className="hero-trigger-arrow" aria-hidden="true">→</span>
+          </MagneticButton>
         </aside>
       </div>
 
-      <ControllerHints left="SCROLL TO PROJECTS" right="CONTACT BY MAIL" />
+      <ControllerHints left="SCROLL TO SWITCH PAGES" shortcutPage="home" />
     </section>
   );
 }
